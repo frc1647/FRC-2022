@@ -37,9 +37,13 @@ public class RobotMap {
   public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(1); //swapped
 
   //Joysticks
-  public static Joystick leftJoy = new Joystick(1);
-  public static Joystick rightJoy = new Joystick(2);
+  public static Joystick leftJoy = new Joystick(2);
+  public static Joystick rightJoy = new Joystick(1);
   public static Joystick tablet = new Joystick(0);
+
+  // Ball Lift
+  public static WPI_TalonFX BallLift1 = new WPI_TalonFX(50);
+  public static WPI_TalonFX BallLift2 = new WPI_TalonFX(51);
 
   // Others
   public static Encoder leftClimberEncoder = new Encoder(0, 1);

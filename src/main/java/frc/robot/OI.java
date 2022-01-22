@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.BallLiftDown;
+import frc.robot.commands.BallLiftUp;
 //import frc.robot.commands.Climber.*;
 //import frc.robot.commands.Intake.*;
 import frc.robot.commands.Movement.*;
@@ -37,36 +39,43 @@ public class OI {
 
   public OI(){
     //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
+    
+    JoystickButton intake = new JoystickButton(rightJoy, 5);
+    JoystickButton ballsUp = new JoystickButton(rightJoy, 3);
+    JoystickButton ballsDown = new JoystickButton(rightJoy, 4);
+
+    ballsUp.whenPressed(new BallLiftUp());
+    ballsDown.whenPressed(new BallLiftDown());
+
+    /*
     JoystickButton snapToAngle = new JoystickButton(rightJoy, 1);
     JoystickButton alignWithGoalJoystickButton = new JoystickButton(rightJoy, 3);
     JoystickButton climbArmUpJoystickButton = new JoystickButton(rightJoy, 5);
     JoystickButton climbArmDownJoystickButton = new JoystickButton(rightJoy, 4);
     JoystickButton winchUpJoystickButton = new JoystickButton(rightJoy, 2);
-
-    //alignWithGoalJoystickButton.whenPressed(new Align());
-        
+    */
+    //alignWithGoalJoystickButton.whenPressed(new Align()); 
     //snapToAngle.whileHeld(new SnapToAngle());
-    
     //climbArmUpJoystickButton.whileHeld(new ClimbArmUp());
     //climbArmDownJoystickButton.whileHeld(new ClimbArmDown());
     //winchUpJoystickButton.whileHeld(new WinchUp());
 
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
+    
+
+    /*
     JoystickButton shootJoystickButton = new JoystickButton(leftJoy, 1);
     JoystickButton highGoalShootJoystickButton = new JoystickButton(leftJoy, 3);
     JoystickButton lowGoalShootJoystickButton = new JoystickButton(leftJoy, 2);
     JoystickButton loadCellsJoystickButton = new JoystickButton(leftJoy, 5);
     JoystickButton unloadCellsJoystickButton = new JoystickButton(leftJoy, 4);
-
+    */
     //shootJoystickButton.whenPressed(new FeedShooter());
-
     //highGoalShootJoystickButton.whileHeld(new HighGoalShoot());
     //lowGoalShootJoystickButton.whileHeld(new LowGoalShoot());
-
     //loadCellsJoystickButton.whileHeld(new LoadCells());
     //unloadCellsJoystickButton.whileHeld(new UnloadCells());
-
 
     //Tablet Tablet Tablet Tablet Tablet
     JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
