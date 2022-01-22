@@ -19,6 +19,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SensorUtil;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
@@ -43,6 +44,7 @@ public class Robot extends TimedRobot {
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
   public static String mode;
   public static Timer m_timer = new Timer();
+  public static ClimberSubsystem ClimberSubsytem = new ClimberSubsystem();
   
   public static OI oi;
   Command m_autonomousCommand;

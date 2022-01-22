@@ -42,6 +42,11 @@ public class RobotMap {
   public static Joystick tablet = new Joystick(0);
 
   // Others
+  public static Encoder leftClimberEncoder = new Encoder(0, 1);
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
+
+  //Climber Motor Controllers
+  public static WPI_TalonFX leftClimber = new WPI_TalonFX(11); //Falcon 500
+  public static WPI_TalonFX rightClimber = new WPI_TalonFX(12); //Falcon 500
 }
