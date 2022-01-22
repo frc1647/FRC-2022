@@ -24,6 +24,7 @@ import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
 import frc.robot.subsystems.Swerve.*;
+import frc.robot.subsystems.BallLift;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
@@ -43,6 +44,7 @@ public class Robot extends TimedRobot {
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
   public static String mode;
   public static Timer m_timer = new Timer();
+  public static BallLift ballLift = new BallLift();
   
   public static OI oi;
   Command m_autonomousCommand;
