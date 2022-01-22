@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.BallLiftDown;
 import frc.robot.commands.BallLiftUp;
+import frc.robot.commands.ExtendClimber;
+import frc.robot.commands.RetractClimber;
+import frc.robot.commands.SpinIntake;
+import frc.robot.commands.ExtendIntake;
+import frc.robot.commands.RetractIntake;
 //import frc.robot.commands.Climber.*;
 //import frc.robot.commands.Intake.*;
 import frc.robot.commands.Movement.*;
@@ -39,13 +44,17 @@ public class OI {
 
   public OI(){
     //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
-    
-    JoystickButton intake = new JoystickButton(rightJoy, 5);
+    JoystickButton intakeSpin = new JoystickButton(rightJoy, 1);
     JoystickButton ballsUp = new JoystickButton(rightJoy, 3);
-    JoystickButton ballsDown = new JoystickButton(rightJoy, 4);
+    JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
+    JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
+    JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
     ballsDown.whenPressed(new BallLiftDown());
+    intakeSpin.whileHeld(new SpinIntake());
+    intakeUp.whenPressed(new RetractIntake());
+    intakeDown.whenPressed(new ExtendIntake());
 
     /*
     JoystickButton snapToAngle = new JoystickButton(rightJoy, 1);
@@ -62,7 +71,11 @@ public class OI {
 
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
-    
+    JoystickButton climbUp = new JoystickButton(leftJoy, 2);
+    JoystickButton climbDown = new JoystickButton(leftJoy, 3);
+
+    climbUp.whenPressed(new ExtendClimber());
+    climbDown.whenPressed(new RetractClimber());
 
     /*
     JoystickButton shootJoystickButton = new JoystickButton(leftJoy, 1);
