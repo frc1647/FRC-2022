@@ -12,12 +12,6 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Swerve.*;
 import frc.robot.OI;
 
-// Motor control imports
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 public class Drive extends Command {
 
   private double fwd;
