@@ -27,10 +27,8 @@ public class RetractClimber extends Command {
         climberSubsystem.stopClimber();
     }
 
-
     @Override
     protected boolean isFinished() {
-        // TODO Auto-generated method stub
         return true;
     }
     

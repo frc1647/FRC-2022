@@ -53,4 +53,8 @@ public class RobotMap {
   //Climber Motor Controllers
   public static WPI_TalonFX leftClimber = new WPI_TalonFX(11); //Falcon 500
   public static WPI_TalonFX rightClimber = new WPI_TalonFX(12); //Falcon 500
+
+  //Intake Motor Controllers
+  public static WPI_TalonFX intakePosition = new WPI_TalonFX(13);
+  public static WPI_TalonSRX intakeSpin = new WPI_TalonSRX(14);
 }

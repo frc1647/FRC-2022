@@ -2,14 +2,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class ExtendClimber extends Command {
+public class ExtendIntake extends Command {
 
-    ClimberSubsystem climberSubsystem = Robot.ClimberSubsytem;
+    IntakeSubsystem intakeSubsystem = Robot.IntakeSubsystem;
 
-    public ExtendClimber() {
-        requires(Robot.ClimberSubsytem);
+    public ExtendIntake() {
+        requires(Robot.IntakeSubsystem);
     }
 
     @Override
@@ -19,12 +19,12 @@ public class ExtendClimber extends Command {
 
     @Override
     protected void execute() {
-        climberSubsystem.extendClimberAutoStop();
+        intakeSubsystem.extendIntakeAutoStop();
     }
 
     @Override
     protected void end() {
-        climberSubsystem.stopClimber();
+        intakeSubsystem.stopIntakePosition();
     }
 
     @Override
