@@ -64,9 +64,9 @@ public class BallLift extends Subsystem {
     motor.setNeutralMode(NeutralMode.Brake);
     motor.configAllowableClosedloopError(1, 4, 10);
     // NEED TO TUNE THESE (if we use setPosition2)
-    motor.config_kP(2, 6.9, 0);
-    motor.config_kI(2, 0, 0);
-    motor.config_kD(2, 0.03, 0);
+    motor.config_kP(1, 6.9, 0);
+    motor.config_kI(1, 0, 0);
+    motor.config_kD(1, 0.03, 0);
   }
 
   public void setPosition(double desiredHeight) {
