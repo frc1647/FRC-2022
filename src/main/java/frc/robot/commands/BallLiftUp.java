@@ -16,18 +16,17 @@ import frc.robot.Robot;
 public class BallLiftUp extends Command {
   public BallLiftUp() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
+    requires(Robot.ballLift);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.ballLift.setPosition(420);
+    Robot.ballLift.setPosition(-52000);
   }
 
   // Make this return true when this Command no longer needs to run execute()

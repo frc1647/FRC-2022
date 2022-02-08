@@ -34,13 +34,13 @@ public class SwerveDrivetrain extends Subsystem {
   // here. Call these from Commands.
 
   public static BaseMotorController frDrive = RobotMap.FRTalonD; //Front right drive
-  public static BaseMotorController frSteer = RobotMap.FRTalonS; //front right steer
   public static BaseMotorController flDrive = RobotMap.FLTalonD; //front left drive
-  public static BaseMotorController flSteer = RobotMap.FLTalonS; //front left steer
   public static BaseMotorController rrDrive = RobotMap.RRTalonD; //rear right Drive
-  public static BaseMotorController rrSteer = RobotMap.RRTalonS; //rear right steer
   public static BaseMotorController rlDrive = RobotMap.RLTalonD; //rear left drive
-  public static BaseMotorController rlSteer = RobotMap.RLTalonS; //rear left steer
+  public static WPI_TalonSRX frSteer = RobotMap.FRTalonS; //front right steer
+  public static WPI_TalonSRX flSteer = RobotMap.FLTalonS; //front left steer
+  public static WPI_TalonSRX rrSteer = RobotMap.RRTalonS; //rear right steer
+  public static WPI_TalonSRX rlSteer = RobotMap.RLTalonS; //rear left steer
 
   private final double width = 22; //was 9.5 //NEW: was 10.5
   private final double length = 21; //was 8.5 //NEW: was 9.25
@@ -94,8 +94,8 @@ public class SwerveDrivetrain extends Subsystem {
     resetDriveEnc();
   }
 
-  public void initSteerMotor(BaseMotorController steerMotor){
-    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+  public void initSteerMotor(WPI_TalonSRX steerMotor){
+    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10); //CTRE_MagEncoder_Absolute when encoders are installed
     steerMotor.setSensorPhase(false);
 
     steerMotor.configPeakOutputForward(1, 10);

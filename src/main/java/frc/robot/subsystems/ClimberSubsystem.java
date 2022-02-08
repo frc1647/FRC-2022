@@ -1,19 +1,25 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class ClimberSubsystem extends Subsystem{
 
-    private final BaseMotorController leftClimber = RobotMap.leftClimber;
-    private final BaseMotorController rightClimber = RobotMap.rightClimber;
+    private WPI_TalonFX leftClimber;
+    private WPI_TalonFX rightClimber;
 
-    //Stop Values
-    final double extendPosition = 0;
-    final double retractPosition = 0;
+    private double extendPosition;
+    private double retractPosition;
     
     @Override
     protected void initDefaultCommand() {
@@ -21,7 +27,39 @@ public class ClimberSubsystem extends Subsystem{
     }
 
     public ClimberSubsystem() {
+        leftClimber = RobotMap.leftClimber;
+        rightClimber = RobotMap.rightClimber;
 
+        //leftClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        //rightClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        //leftClimber.setSensorPhase(true);
+        //rightClimber.setSensorPhase(false);
+        //leftClimber.setNeutralMode(NeutralMode.Brake);
+        //rightClimber.setNeutralMode(NeutralMode.Brake);
+
+        initMotor(leftClimber);
+        initMotor(rightClimber);
+
+        rightClimber.follow(leftClimber);
+        rightClimber.setInverted(TalonFXInvertType.FollowMaster);
+
+        extendPosition = 0;
+        retractPosition = 0;
+    }
+
+    public void initMotor(WPI_TalonFX motor) {
+        motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        motor.setSensorPhase(false);
+        //motor.configPeakOutputForward(1, 0);
+        //motor.configPeakOutputReverse(-1, 0);
+        //motor.configNominalOutputForward(0, 0);
+        //motor.configNominalOutputReverse(0, 0);
+        motor.setNeutralMode(NeutralMode.Brake);
+        motor.configAllowableClosedloopError(2, 4, 10);
+        // NEED TO TUNE THESE
+        motor.config_kP(2, 6.9, 0);
+        motor.config_kI(2, 0, 0);
+        motor.config_kD(2, 0.03, 0);
     }
     
     public void stopClimber() {

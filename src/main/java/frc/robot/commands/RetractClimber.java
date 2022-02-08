@@ -6,10 +6,8 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class RetractClimber extends Command {
 
-    ClimberSubsystem climberSubsystem = Robot.ClimberSubsytem;
-
     public RetractClimber() {
-        requires(Robot.ClimberSubsytem);
+        requires(Robot.ClimberSubsystem);
     }
 
     @Override
@@ -19,12 +17,12 @@ public class RetractClimber extends Command {
 
     @Override
     protected void execute() {
-        climberSubsystem.retractClimberAutoStop();
+        Robot.ClimberSubsystem.retractClimberAutoStop();
     }
 
     @Override
     protected void end() {
-        climberSubsystem.stopClimber();
+        Robot.ClimberSubsystem.stopClimber();
     }
 
     @Override

@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
   public static String mode;
   public static Timer m_timer = new Timer();
-  public static ClimberSubsystem ClimberSubsytem = new ClimberSubsystem();
+  public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   

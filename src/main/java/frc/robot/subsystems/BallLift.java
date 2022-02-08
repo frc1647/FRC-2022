@@ -8,8 +8,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -29,19 +35,38 @@ public class BallLift extends Subsystem {
 
   public BallLift() {
     tolerance = 250;
-    goalHeight = 0;
+    goalHeight = 0; //temporary value
     motorSpeed = 0.75; //ranges from -1 to 1
     
     motor1 = RobotMap.BallLift1;
-    motor1.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     motor2 = RobotMap.BallLift2;
-    motor2.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+
+    initMotor(motor1);
+    initMotor(motor2);
+
+    //motor2.follow(motor1);
+    motor2.setInverted(TalonFXInvertType.OpposeMaster);
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void initMotor(WPI_TalonFX motor) {
+    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+    motor.setSensorPhase(false);
+    //motor.configPeakOutputForward(1, 0);
+    //motor.configPeakOutputReverse(-1, 0);
+    //motor.configNominalOutputForward(0, 0);
+    //motor.configNominalOutputReverse(0, 0);
+    motor.setNeutralMode(NeutralMode.Brake);
+    motor.configAllowableClosedloopError(1, 4, 10);
+    // NEED TO TUNE THESE (if we use setPosition2)
+    motor.config_kP(2, 6.9, 0);
+    motor.config_kI(2, 0, 0);
+    motor.config_kD(2, 0.03, 0);
   }
 
   public void setPosition(double desiredHeight) {
@@ -57,10 +82,9 @@ public class BallLift extends Subsystem {
     delta();
   }
 
-  public void setPosition2(double desiredHeight){ //not used in the commands, but might would be a better implementation if it works
+  public void setPosition2(double desiredHeight) { //not used in the commands, but would be a better implementation if it works
     goalHeight = desiredHeight;
     motor1.set(ControlMode.Position, goalHeight);
-    motor2.follow(motor1);
   }
 
   public boolean delta(){

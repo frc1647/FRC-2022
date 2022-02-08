@@ -6,8 +6,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class SpinIntake extends Command {
 
-    IntakeSubsystem intakeSubsystem = Robot.IntakeSubsystem;
-
     public SpinIntake() {
         requires(Robot.IntakeSubsystem);
     }
@@ -19,17 +17,22 @@ public class SpinIntake extends Command {
 
     @Override
     protected void execute() {
-        intakeSubsystem.spinIntake();
+        Robot.IntakeSubsystem.spinIntake();
     }
 
     @Override
     protected void end() {
-        intakeSubsystem.stopIntakeSpin();
+        Robot.IntakeSubsystem.stopIntakeSpin();
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
+    }
+
+    @Override
+    protected void interrupted() {
+        Robot.IntakeSubsystem.stopIntakeSpin();
     }
     
 }

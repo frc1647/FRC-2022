@@ -6,10 +6,8 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class ExtendClimber extends Command {
 
-    ClimberSubsystem climberSubsystem = Robot.ClimberSubsytem;
-
     public ExtendClimber() {
-        requires(Robot.ClimberSubsytem);
+        requires(Robot.ClimberSubsystem);
     }
 
     @Override
@@ -19,12 +17,12 @@ public class ExtendClimber extends Command {
 
     @Override
     protected void execute() {
-        climberSubsystem.extendClimberAutoStop();
+        Robot.ClimberSubsystem.extendClimberAutoStop();
     }
 
     @Override
     protected void end() {
-        climberSubsystem.stopClimber();
+        Robot.ClimberSubsystem.stopClimber();
     }
 
     @Override

@@ -14,15 +14,15 @@ import frc.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class BallLiftDown extends Command {
+
   public BallLiftDown() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
+    requires(Robot.ballLift);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -46,5 +46,6 @@ public class BallLiftDown extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.ballLift.stopBallLift();
   }
 }

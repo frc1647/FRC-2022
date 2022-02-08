@@ -2,26 +2,32 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class IntakeSubsystem extends Subsystem {
 
-    private final BaseMotorController intakePosition = RobotMap.intakePosition;
-    private final BaseMotorController intakeSpin = RobotMap.intakeSpin;
+    private WPI_TalonFX intakePosition;
+    private BaseMotorController intakeSpin;
 
-    //Stop Values
-    final double extendPosition = 0;
-    final double retractPosition = 0;
+    private double extendPosition;
+    private double retractPosition;
 
     @Override
-    protected void initDefaultCommand() {
-   
-    }
+    protected void initDefaultCommand() {}
+
+    //FYI: the intake having a motorized drop mechanism is uncertain
 
     public IntakeSubsystem() {
+        //intakePosition = RobotMap.intakePosition;
+        intakePosition.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        intakeSpin = RobotMap.intakeSpin;
 
+        extendPosition = 0;
+        retractPosition = 0;
     }
 
     public void extendIntake() {
