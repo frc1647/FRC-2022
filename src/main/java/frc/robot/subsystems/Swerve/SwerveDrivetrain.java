@@ -90,12 +90,12 @@ public class SwerveDrivetrain extends Subsystem {
     initSteerMotor(flSteer);
     initSteerMotor(rrSteer);
     initSteerMotor(rlSteer);
-    resetQuadrentureEncoder();
-    resetDriveEnc();
+    resetPosition();
+    //resetDriveEnc();
   }
 
   public void initSteerMotor(WPI_TalonSRX steerMotor){
-    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10); //CTRE_MagEncoder_Absolute when encoders are installed
+    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 10);
     steerMotor.setSensorPhase(false);
 
     steerMotor.configPeakOutputForward(1, 10);
@@ -127,7 +127,7 @@ public class SwerveDrivetrain extends Subsystem {
     enc.reset(); //maybe change
   }
 
-  public void resetQuadrentureEncoder(){
+  public void resetPosition(){
     frSteer.set(ControlMode.Position, 0);
     flSteer.set(ControlMode.Position, 0);
     rrSteer.set(ControlMode.Position, 0);

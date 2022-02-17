@@ -38,8 +38,8 @@ public class BallLift extends Subsystem {
     goalHeight = 0; //temporary value
     motorSpeed = 0.75; //ranges from -1 to 1
     
-    motor1 = RobotMap.BallLift1;
-    motor2 = RobotMap.BallLift2;
+    motor1 = RobotMap.BallLiftLeft;
+    motor2 = RobotMap.BallLiftRight;
 
     initMotor(motor1);
     initMotor(motor2);
