@@ -96,7 +96,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = new DriveDistance(69);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -126,7 +127,7 @@ public class Robot extends TimedRobot {
   /** This function is called once when the robot is disabled. */
   @Override
   public void disabledInit() {
-
+    //Robot.drivetrain.stop();
   }
 
   /** This function is called periodically when disabled. */
