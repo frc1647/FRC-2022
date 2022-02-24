@@ -6,6 +6,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class RetractClimber extends Command {
 
+    /** Retracts the climber all the way down. */
     public RetractClimber() {
         requires(Robot.ClimberSubsystem);
     }

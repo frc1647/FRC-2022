@@ -10,10 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * An example command.  You can replace me with your own command.
- */
 public class BallLiftUp extends Command {
+  
+  /** Lifts the cargo elevator up to unload cargo. */
   public BallLiftUp() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballLift);

@@ -14,9 +14,9 @@ import frc.robot.commands.BallLiftDown;
 import frc.robot.commands.BallLiftUp;
 import frc.robot.commands.ExtendClimber;
 import frc.robot.commands.RetractClimber;
-import frc.robot.commands.SpinIntake;
-import frc.robot.commands.ExtendIntake;
-import frc.robot.commands.RetractIntake;
+import frc.robot.commands.Intake.ExtendIntake;
+import frc.robot.commands.Intake.RetractIntake;
+import frc.robot.commands.Intake.SpinIntake;
 
 /**
  * This class is the glue that binds the controls on the physical operator

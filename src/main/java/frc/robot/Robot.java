@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     //m_autonomousCommand = m_chooser.getSelected();
-    m_autonomousCommand = new DriveDistance(69);
+    m_autonomousCommand = new Auto1();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }

@@ -43,7 +43,7 @@ public class ClimberSubsystem extends Subsystem{
         rightClimber.follow(leftClimber);
         rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
-        extendPosition = 0;
+        extendPosition = 69;
         retractPosition = 0;
     }
 

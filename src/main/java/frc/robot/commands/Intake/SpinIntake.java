@@ -1,12 +1,13 @@
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class ExtendIntake extends Command {
+public class SpinIntake extends Command {
 
-    public ExtendIntake() {
+    /**Spins the intake. */
+    public SpinIntake() {
         requires(Robot.IntakeSubsystem);
     }
 
@@ -17,22 +18,22 @@ public class ExtendIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.IntakeSubsystem.extendIntakeAutoStop();
+        Robot.IntakeSubsystem.spinIntake();
     }
 
     @Override
     protected void end() {
-        Robot.IntakeSubsystem.stopIntakePosition();
+        Robot.IntakeSubsystem.stopIntakeSpin();
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override
     protected void interrupted() {
-        Robot.IntakeSubsystem.stopIntakePosition();
+        Robot.IntakeSubsystem.stopIntakeSpin();
     }
     
 }

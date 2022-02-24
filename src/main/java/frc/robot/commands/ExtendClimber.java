@@ -6,6 +6,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class ExtendClimber extends Command {
 
+    /**Extends the climber to a height specified in {@link ClimberSubsystem} */
     public ExtendClimber() {
         requires(Robot.ClimberSubsystem);
     }
