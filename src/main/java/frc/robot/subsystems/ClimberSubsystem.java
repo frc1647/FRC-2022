@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
 
 public class ClimberSubsystem extends Subsystem{
 
-    private WPI_TalonFX leftClimber;
+    //private WPI_TalonFX leftClimber;
     private WPI_TalonFX rightClimber;
 
     private double extendPosition;
@@ -37,10 +37,10 @@ public class ClimberSubsystem extends Subsystem{
         //leftClimber.setNeutralMode(NeutralMode.Brake);
         //rightClimber.setNeutralMode(NeutralMode.Brake);
 
-        initMotor(leftClimber);
+        //initMotor(leftClimber);
         initMotor(rightClimber);
 
-        rightClimber.follow(leftClimber);
+        //rightClimber.follow(leftClimber);
         rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
         extendPosition = 69;
@@ -48,13 +48,13 @@ public class ClimberSubsystem extends Subsystem{
     }
 
     public void initMotor(WPI_TalonFX motor) {
-        motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
-        motor.setSensorPhase(false);
+        //motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        //motor.setSensorPhase(false);
         //motor.configPeakOutputForward(1, 0);
         //motor.configPeakOutputReverse(-1, 0);
         //motor.configNominalOutputForward(0, 0);
         //motor.configNominalOutputReverse(0, 0);
-        motor.setNeutralMode(NeutralMode.Brake);
+        //motor.setNeutralMode(NeutralMode.Brake);
         motor.configAllowableClosedloopError(2, 4, 10);
         // NEED TO TUNE THESE
         motor.config_kP(2, 6.9, 0);
@@ -64,42 +64,42 @@ public class ClimberSubsystem extends Subsystem{
     
     public void stopClimber() {
 
-        leftClimber.set(ControlMode.PercentOutput, 0);
+        //leftClimber.set(ControlMode.PercentOutput, 0);
         rightClimber.set(ControlMode.PercentOutput, 0);
 
     }
 
     public void extendClimber() {
 
-        leftClimber.set(ControlMode.PercentOutput, 0.5);
+        //leftClimber.set(ControlMode.PercentOutput, 0.5);
         rightClimber.set(ControlMode.PercentOutput, 0.5);
 
     }
 
     public void retractClimber() {
 
-        leftClimber.set(ControlMode.PercentOutput, -0.25);
+        //leftClimber.set(ControlMode.PercentOutput, -0.25);
         rightClimber.set(ControlMode.PercentOutput, -0.25);
 
     }
 
     public void extendClimberAutoStop() {
 
-        leftClimber.set(ControlMode.Position, extendPosition);
+        //leftClimber.set(ControlMode.Position, extendPosition);
         rightClimber.set(ControlMode.Position, extendPosition);
 
     }
 
     public void retractClimberAutoStop() {
 
-        leftClimber.set(ControlMode.Position, retractPosition);
+        //leftClimber.set(ControlMode.Position, retractPosition);
         rightClimber.set(ControlMode.Position, retractPosition);
 
     }
 
     public void resetClimber() {
 
-        leftClimber.set(ControlMode.Position, 0);
+        //leftClimber.set(ControlMode.Position, 0);
         rightClimber.set(ControlMode.Position, 0);
 
     }

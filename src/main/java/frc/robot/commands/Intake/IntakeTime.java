@@ -27,7 +27,7 @@ public class IntakeTime extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.IntakeSubsystem.spinIntake();
+    Robot.IntakeSubsystem.spinIntake(1);
   }
 
   // Called once after timeout

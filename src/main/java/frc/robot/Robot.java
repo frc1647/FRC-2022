@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SensorUtil;
-//import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+//import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Swerve.Swerve;
@@ -45,10 +47,11 @@ public class Robot extends TimedRobot {
   public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
   public static String mode;
-  public static Timer m_timer = new Timer();
+  //public static Timer m_timer = new Timer();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
+  public static UsbCamera usbCam;
   
   public static OI oi;
   Command m_autonomousCommand;
@@ -70,6 +73,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    usbCam = CameraServer.startAutomaticCapture();
   }
 
   /**
@@ -112,7 +116,7 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-    m_timer.start();
+    //m_timer.start();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

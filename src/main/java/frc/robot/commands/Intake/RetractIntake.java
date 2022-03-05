@@ -17,7 +17,7 @@ public class RetractIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.IntakeSubsystem.retractIntakeAutoStop();
+        //Robot.IntakeSubsystem.retractIntakeAutoStop();
     }
 
     @Override

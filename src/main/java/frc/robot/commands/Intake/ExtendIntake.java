@@ -6,6 +6,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class ExtendIntake extends Command {
 
+
     public ExtendIntake() {
         requires(Robot.IntakeSubsystem);
     }
@@ -17,7 +18,7 @@ public class ExtendIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.IntakeSubsystem.extendIntakeAutoStop();
+        //Robot.IntakeSubsystem.extendIntakeAutoStop();
     }
 
     @Override

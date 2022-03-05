@@ -33,20 +33,22 @@ public class OI {
     JoystickButton intakeSpin = new JoystickButton(rightJoy, 1);
     JoystickButton ballsUp = new JoystickButton(rightJoy, 3);
     JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
-    JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
-    JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
+    //JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
+    //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
     ballsDown.whenPressed(new BallLiftDown());
-    intakeSpin.whileHeld(new SpinIntake());
-    intakeUp.whenPressed(new RetractIntake());
-    intakeDown.whenPressed(new ExtendIntake());
+    intakeSpin.whileHeld(new SpinIntake(1));
+    //intakeUp.whenPressed(new RetractIntake());
+    //intakeDown.whenPressed(new ExtendIntake());
 
-    JoystickButton climbUp = new JoystickButton(leftJoy, 2);
-    JoystickButton climbDown = new JoystickButton(leftJoy, 3);
+    JoystickButton climbUp = new JoystickButton(leftJoy, 3);
+    JoystickButton climbDown = new JoystickButton(leftJoy, 2);
+    JoystickButton intakeReverse = new JoystickButton(leftJoy, 5);
 
-    climbUp.whenPressed(new ExtendClimber());
-    climbDown.whenPressed(new RetractClimber());
+    //climbUp.whenPressed(new ExtendClimber());
+    //climbDown.whenPressed(new RetractClimber());
+    intakeReverse.whileHeld(new SpinIntake(-1));
   
   }
 

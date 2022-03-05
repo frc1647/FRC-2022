@@ -6,9 +6,15 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class SpinIntake extends Command {
 
-    /**Spins the intake. */
-    public SpinIntake() {
+    private int invert;
+
+    /** Spins the intake.
+     * 
+     * @param reverse If -1, the intake spins in reverse. If 1, the intake spins normally.
+     */
+    public SpinIntake(int reverse) {
         requires(Robot.IntakeSubsystem);
+        invert = reverse;
     }
 
     @Override
@@ -18,7 +24,7 @@ public class SpinIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.IntakeSubsystem.spinIntake();
+        Robot.IntakeSubsystem.spinIntake(invert);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Auto1 extends CommandGroup {
     addSequential(new DriveDistance(forwardDistance, false));
     addSequential(new BallLiftUp()); //BallLiftUp command currently uses non PID method
     addSequential(new DriveDistance(reverseDistance, true));
-    addSequential(new SpinIntake(), 20); //works?
+    addSequential(new SpinIntake(1), 20); //works?
     //addSequential(new IntakeTime(20));
     
 

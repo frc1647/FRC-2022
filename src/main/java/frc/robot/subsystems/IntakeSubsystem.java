@@ -13,24 +13,26 @@ public class IntakeSubsystem extends Subsystem {
     private WPI_TalonFX intakePosition;
     private BaseMotorController intakeSpin;
 
-    private double extendPosition;
-    private double retractPosition;
-
+    //private double extendPosition;
+    //private double retractPosition;
+    
     @Override
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+
+    }
 
     //FYI: the intake having a motorized drop mechanism is uncertain
 
     public IntakeSubsystem() {
         //intakePosition = RobotMap.intakePosition;
-        intakePosition.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        //intakePosition.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
         intakeSpin = RobotMap.intakeSpin;
 
-        extendPosition = 0;
-        retractPosition = 0;
+        //extendPosition = 0;
+        //retractPosition = 0;
     }
 
-    public void extendIntake() {
+    /*public void extendIntake() {
 
         intakePosition.set(ControlMode.PercentOutput, 0.25);
 
@@ -52,11 +54,11 @@ public class IntakeSubsystem extends Subsystem {
 
         intakePosition.set(ControlMode.Position, retractPosition);
 
-    }
+    }*/
 
-    public void spinIntake() {
+    public void spinIntake(int invert) {
 
-        intakeSpin.set(ControlMode.PercentOutput, 0.5);
+        intakeSpin.set(ControlMode.PercentOutput, 0.5 * invert);
 
     }
 
