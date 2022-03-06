@@ -11,6 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 public class ClimberSubsystem extends Subsystem{
@@ -42,25 +45,25 @@ public class ClimberSubsystem extends Subsystem{
         initMotor(rightClimber);
 
         //rightClimber.follow(leftClimber);
-        rightClimber.setInverted(TalonFXInvertType.FollowMaster);
+        //rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
-        extendPosition = 69;
+        extendPosition = 1000;
         retractPosition = 0;
     }
 
     public void initMotor(WPI_TalonFX motor) {
-        //motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
-        //motor.setSensorPhase(false);
+        motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+        motor.setSensorPhase(false);
         //motor.configPeakOutputForward(1, 0);
         //motor.configPeakOutputReverse(-1, 0);
         //motor.configNominalOutputForward(0, 0);
         //motor.configNominalOutputReverse(0, 0);
-        //motor.setNeutralMode(NeutralMode.Brake);
+        motor.setNeutralMode(NeutralMode.Brake);
         motor.configAllowableClosedloopError(2, 4, 10);
         // NEED TO TUNE THESE
-        motor.config_kP(2, 6.9, 0);
-        motor.config_kI(2, 0, 0);
-        motor.config_kD(2, 0.03, 0);
+        motor.config_kP(2, SmartDashboard.getNumber("climb kP", 0), 0);
+        motor.config_kI(2, SmartDashboard.getNumber("climb kI", 0), 0);
+        motor.config_kD(2, SmartDashboard.getNumber("climb kD", 0), 0);
     }
     
     public void stopClimber() {
@@ -69,7 +72,7 @@ public class ClimberSubsystem extends Subsystem{
         rightClimber.set(ControlMode.PercentOutput, 0);
 
     }
-
+    
     public void extendClimber(double percentOutput) {
 
         //leftClimber.set(ControlMode.PercentOutput, 0.5);
@@ -83,18 +86,17 @@ public class ClimberSubsystem extends Subsystem{
         rightClimber.set(ControlMode.PercentOutput, percentOutput);
 
     }
-
-    public void extendClimberAutoStop() {
+    
+    /** Moves the climber to a set postion.
+     * 
+     * @param retract If false, the climber extends. If true, the climber retracts.
+     */
+    public void ClimberAutoStop(boolean retract) {
 
         //leftClimber.set(ControlMode.Position, extendPosition);
-        rightClimber.set(ControlMode.Position, extendPosition);
+        rightClimber.set(ControlMode.Position, retract ? extendPosition:retractPosition);
 
-    }
-
-    public void retractClimberAutoStop() {
-
-        //leftClimber.set(ControlMode.Position, retractPosition);
-        rightClimber.set(ControlMode.Position, retractPosition);
+        SmartDashboard.putNumber("Climber height", rightClimber.getSelectedSensorPosition());
 
     }
 

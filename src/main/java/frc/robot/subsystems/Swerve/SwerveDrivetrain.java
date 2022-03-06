@@ -25,6 +25,8 @@ import frc.robot.commands.Movement.Drive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Swerve.SwerveMath;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.livewindow.*;
 
 /**
  * Add your docs here.
@@ -116,7 +118,7 @@ public class SwerveDrivetrain extends Subsystem {
 
     steerMotor.setNeutralMode(NeutralMode.Brake);
 
-    steerMotor.configAllowableClosedloopError(0, 1, 10);
+    steerMotor.configAllowableClosedloopError(0, 2, 10);
 
     steerMotor.config_kP(0, P, 10);
     steerMotor.config_kI(0, I, 10);

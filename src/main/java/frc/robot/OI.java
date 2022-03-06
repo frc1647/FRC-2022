@@ -37,24 +37,28 @@ public class OI {
     JoystickButton intakeSpin = new JoystickButton(rightJoy, 1);
     JoystickButton ballsUp = new JoystickButton(rightJoy, 3);
     JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
+    JoystickButton climbUpConstant = new JoystickButton(rightJoy, 11);
+    JoystickButton climbDownConstant = new JoystickButton(rightJoy, 10);
     //JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
     //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
     ballsDown.whenPressed(new BallLiftDown());
-    intakeSpin.whileHeld(new SpinIntake(1));
+    climbUpConstant.whileHeld(new ExtendClimberConstant());
+    climbDownConstant.whileHeld(new RetractClimberConstant());
+    //intakeSpin.whileHeld(new SpinIntake(1));
     //intakeUp.whenPressed(new RetractIntake());
     //intakeDown.whenPressed(new ExtendIntake());
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
 
-    //JoystickButton climbUp = new JoystickButton(leftJoy, 3);
-    //JoystickButton climbDown = new JoystickButton(leftJoy, 2);
-    JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
+    JoystickButton climbUp = new JoystickButton(leftJoy, 3);
+    JoystickButton climbDown = new JoystickButton(leftJoy, 2);
+    //JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
-    //climbUp.whenPressed(new ExtendClimber());
-    //climbDown.whenPressed(new RetractClimber());
-    intakeReverse.whileHeld(new SpinIntake(-1));
+    climbUp.whenPressed(new ExtendClimber());
+    climbDown.whenPressed(new RetractClimber());
+    //intakeReverse.whileHeld(new SpinIntake(-1));
 
     //Controller Controller Controller Controller Controller Controller
     JoystickButton cIntakeSpin = new JoystickButton(controller, 6);
@@ -66,10 +70,10 @@ public class OI {
     JoystickButton climberConstantUp = new JoystickButton(controller, 3);
     JoystickButton climberConstantDown = new JoystickButton(controller, 2);
 
-    cIntakeSpin.whileHeld(new SpinIntake(1));
-    cIntakeReverse.whileHeld(new SpinIntake(-1));
+    //cIntakeSpin.whileHeld(new SpinIntake(1));
+    //cIntakeReverse.whileHeld(new SpinIntake(-1));
     cLiftBall.whenPressed(new BallLiftUp());
-    climberConstantUp.whenPressed(new BallLiftUp());
+    climberConstantUp.whenPressed(new ExtendClimberConstant());
     cLowerBall.whenPressed(new BallLiftDown());
     climberConstantDown.whenPressed(new RetractClimberConstant());
     //cClimbUp.whenPressed(new ExtendClimber());

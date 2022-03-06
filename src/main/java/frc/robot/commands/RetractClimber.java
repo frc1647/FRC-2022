@@ -18,7 +18,7 @@ public class RetractClimber extends Command {
 
     @Override
     protected void execute() {
-        Robot.ClimberSubsystem.retractClimberAutoStop();
+        Robot.ClimberSubsystem.ClimberAutoStop(true);
     }
 
     @Override

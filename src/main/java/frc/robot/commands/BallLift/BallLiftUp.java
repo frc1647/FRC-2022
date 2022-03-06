@@ -25,7 +25,7 @@ public class BallLiftUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.ballLift.LiftUp(-50000, -50000);
+    Robot.ballLift.LiftMove(-50000, -50000);
   }
 
   // Make this return true when this Command no longer needs to run execute()

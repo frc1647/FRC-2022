@@ -20,6 +20,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -65,36 +66,31 @@ public class BallLift extends Subsystem {
     //motor.configNominalOutputReverse(0, 0);
     motor.setNeutralMode(NeutralMode.Brake);
     motor.configAllowableClosedloopError(1, 4, 10);
-    // NEED TO TUNE THESE (if we use setPosition2)
-    motor.config_kP(1, 5, 0);
-    motor.config_kI(1, 0, 0);
-    motor.config_kD(1, 0.0, 0);
+
+    motor.config_kP(1, SmartDashboard.getNumber("ball kP", 0), 0);
+    motor.config_kI(1, SmartDashboard.getNumber("ball kI", 0), 0);
+    motor.config_kD(1, SmartDashboard.getNumber("ball kD", 0), 0);
   }
 
-  public void LiftUp(int leftHeight, int rightHeight) {
-
+  public void LiftMove(int leftHeight, int rightHeight) {
     getLeftMotor().set(ControlMode.Position, leftHeight);
     getRightMotor().set(ControlMode.Position, rightHeight);
+    SmartDashboard.putNumber("LeftLift height", getPositionLeft());
+    SmartDashboard.putNumber("RightLift height", getPositionRight());
 
   }
 
-  public void liftDown(double desiredHeight) {
-
-    getLeftMotor().set(ControlMode.Position, desiredHeight);
-    getRightMotor().set(ControlMode.Position, desiredHeight);
-  }
-
-  public void stopMotors(WPI_TalonFX motor){
+  public void stopMotors(WPI_TalonFX motor) {
     getLeftMotor().set(ControlMode.PercentOutput, 0);
     getRightMotor().set(ControlMode.PercentOutput, 0);
   }
 
   
-  public double getPostionLeft(){
+  public double getPositionLeft(){
     return BallmotorLeft.getSelectedSensorPosition();
   }
 
-  public double getPostionRight(){
+  public double getPositionRight(){
     return BallmotorRight.getSelectedSensorPosition();
   }
 

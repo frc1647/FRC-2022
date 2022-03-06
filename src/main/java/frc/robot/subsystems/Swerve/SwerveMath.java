@@ -27,7 +27,7 @@ public class SwerveMath {
     private final double width;
     private final double diagonal;
 
-    private CentricMode centricMode = CentricMode.Field; //this is where the inital drive mode is specified
+    private CentricMode centricMode = CentricMode.Robot; //this is where the inital drive mode is specified
 
     public void setModeRobot() {
         centricMode = CentricMode.Robot;
