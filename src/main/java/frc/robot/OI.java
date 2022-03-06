@@ -12,12 +12,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.*;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.BallLiftDown;
-import frc.robot.commands.BallLiftUp;
 import frc.robot.commands.ExtendClimber;
 import frc.robot.commands.ExtendClimberConstant;
 import frc.robot.commands.RetractClimber;
 import frc.robot.commands.RetractClimberConstant;
+import frc.robot.commands.BallLift.*;
 //import frc.robot.commands.Intake.ExtendIntake;
 //import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
@@ -41,8 +40,8 @@ public class OI {
     //JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
     //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
-    ballsUp.whenPressed(new BallLiftUp());
-    ballsDown.whenPressed(new BallLiftDown());
+    ballsUp.whenPressed(new BallLiftUpNew());
+    ballsDown.whenPressed(new BallLiftDownNew());
     intakeSpin.whileHeld(new SpinIntake(1));
     //intakeUp.whenPressed(new RetractIntake());
     //intakeDown.whenPressed(new ExtendIntake());
@@ -69,12 +68,14 @@ public class OI {
 
     cIntakeSpin.whileHeld(new SpinIntake(1));
     cIntakeReverse.whileHeld(new SpinIntake(-1));
-    cLiftBall.whenPressed(new BallLiftUp());
-    cLowerBall.whenPressed(new BallLiftDown());
+    cLiftBall.whenPressed(new BallLiftUpLeft());
+    climberConstantUp.whenPressed(new BallLiftUpRight());
+    cLowerBall.whenPressed(new BallLiftDownLeft());
+    climberConstantDown.whenPressed(new BallLiftDownRight());
     //cClimbUp.whenPressed(new ExtendClimber());
     //cClimbDown.whenPressed(new RetractClimber());
-    climberConstantUp.whenPressed(new ExtendClimberConstant());
-    climberConstantDown.whenPressed(new RetractClimberConstant());
+    //climberConstantUp.whenPressed(new ExtendClimberConstant());
+    //climberConstantDown.whenPressed(new RetractClimberConstant());
   
   }
 

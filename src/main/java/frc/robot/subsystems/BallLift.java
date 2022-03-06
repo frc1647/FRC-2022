@@ -26,23 +26,23 @@ import frc.robot.RobotMap;
 public class BallLift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public WPI_TalonFX motor1;
-  public WPI_TalonFX motor2;
+  public WPI_TalonFX BallmotorLeft;
+  public WPI_TalonFX BallmotorRight;
 
   private double tolerance;
   private double goalHeight;
   private double motorSpeed;
 
   public BallLift() {
-    tolerance = 200;
+    tolerance = 500;
     goalHeight = 0; //temporary value
     motorSpeed = 0.37; //ranges from -1 to 1
     
-    motor1 = RobotMap.BallLiftLeft;
-    motor2 = RobotMap.BallLiftRight;
+    BallmotorLeft = RobotMap.BallLiftLeft;
+    BallmotorRight = RobotMap.BallLiftRight;
 
-    initMotor(motor1);
-    initMotor(motor2);
+    initMotor(BallmotorLeft);
+    initMotor(BallmotorRight);
 
     //motor2.follow(motor1);
     //motor2.setInverted(TalonFXInvertType.OpposeMaster);
@@ -64,48 +64,54 @@ public class BallLift extends Subsystem {
     motor.setNeutralMode(NeutralMode.Brake);
     motor.configAllowableClosedloopError(1, 4, 10);
     // NEED TO TUNE THESE (if we use setPosition2)
-    motor.config_kP(1, 6.9, 0);
+    motor.config_kP(1, 5, 0);
     motor.config_kI(1, 0, 0);
-    motor.config_kD(1, 0.03, 0);
+    motor.config_kD(1, 0.0, 0);
   }
 
-  public void setPosition(double desiredHeight) {
+  public void setPosition(double desiredHeight, WPI_TalonFX motor) {
     goalHeight = desiredHeight;
-    if (goalHeight - getPostion1() < 0){
-      motor1.set(-motorSpeed);
-      motor2.set(motorSpeed * 1.4); // * 1.0296296296
+    if (goalHeight - motor.getSelectedSensorPosition() < 0){
+      motor.set(-motorSpeed);
+      //motor2.set(motorSpeed * 1.4); // * 1.0296296296
     } else {
-      motor1.set(motorSpeed);
-      motor2.set(-motorSpeed * 1.4);
+      motor.set(motorSpeed);
+      //motor2.set(motorSpeed * 1.4);
     }
     //motor2.follow(motor1);
-    delta();
+    delta(motor);
   }
 
-  public void setPosition2(double desiredHeight) { //not used in the commands, but would be a better implementation if it works
+  public void setPosition2(double desiredHeight, WPI_TalonFX motor) { //not used in the commands, but would be a better implementation if it works
     goalHeight = desiredHeight;
-    motor1.set(ControlMode.Position, goalHeight);
+    motor.set(ControlMode.Position, goalHeight);
   }
 
-  public boolean delta(){
-    if (Math.abs(getPostion1() - goalHeight) < tolerance){
-      return true;
-    } else {
-      return false;
+  public void delta(WPI_TalonFX motor){
+    if (Math.abs(motor.getSelectedSensorPosition() - goalHeight) < tolerance){
+      stopMotor(motor);
     }
   }
 
-  public void stopBallLift(){
-    motor1.set(ControlMode.PercentOutput, 0);
-    motor2.set(ControlMode.PercentOutput, 0);
-  }
-  
-  public double getPostion1(){
-    return motor1.getSelectedSensorPosition(0);
+  public void stopMotor(WPI_TalonFX motor){
+    motor.set(ControlMode.PercentOutput, 0);
   }
 
-  public double getPostion2(){
-    return motor2.getSelectedSensorPosition(0);
+  
+  public double getPostionLeft(){
+    return BallmotorLeft.getSelectedSensorPosition();
+  }
+
+  public double getPostionRight(){
+    return BallmotorRight.getSelectedSensorPosition();
+  }
+
+  public WPI_TalonFX getLeftMotor() {
+    return BallmotorLeft;
+  }
+
+  public WPI_TalonFX getRightMotor() {
+    return BallmotorRight;
   }
 
 }
