@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.BallLiftDown;
 import frc.robot.commands.BallLiftUp;
 import frc.robot.commands.ExtendClimber;
+import frc.robot.commands.ExtendClimberConstant;
 import frc.robot.commands.RetractClimber;
+import frc.robot.commands.RetractClimberConstant;
 //import frc.robot.commands.Intake.ExtendIntake;
 //import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
@@ -60,15 +62,19 @@ public class OI {
     JoystickButton cIntakeReverse = new JoystickButton(controller, 5);
     JoystickButton cLiftBall = new JoystickButton(controller, 4);
     JoystickButton cLowerBall = new JoystickButton(controller, 1);
-    JoystickButton cClimbUp = new JoystickButton(controller, 3);
-    JoystickButton cClimbDown = new JoystickButton(controller, 2);
+    //JoystickButton cClimbUp = new JoystickButton(controller, 3);
+    //JoystickButton cClimbDown = new JoystickButton(controller, 2);
+    JoystickButton climberConstantUp = new JoystickButton(controller, 3);
+    JoystickButton climberConstantDown = new JoystickButton(controller, 2);
 
     cIntakeSpin.whileHeld(new SpinIntake(1));
     cIntakeReverse.whileHeld(new SpinIntake(-1));
     cLiftBall.whenPressed(new BallLiftUp());
     cLowerBall.whenPressed(new BallLiftDown());
-    cClimbUp.whenPressed(new ExtendClimber());
-    cClimbDown.whenPressed(new RetractClimber());
+    //cClimbUp.whenPressed(new ExtendClimber());
+    //cClimbDown.whenPressed(new RetractClimber());
+    climberConstantUp.whenPressed(new ExtendClimberConstant());
+    climberConstantDown.whenPressed(new RetractClimberConstant());
   
   }
 

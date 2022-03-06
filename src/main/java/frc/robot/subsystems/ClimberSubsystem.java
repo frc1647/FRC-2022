@@ -70,17 +70,17 @@ public class ClimberSubsystem extends Subsystem{
 
     }
 
-    public void extendClimber() {
+    public void extendClimber(double percentOutput) {
 
         //leftClimber.set(ControlMode.PercentOutput, 0.5);
-        rightClimber.set(ControlMode.PercentOutput, 0.5);
+        rightClimber.set(ControlMode.PercentOutput, percentOutput);
 
     }
 
-    public void retractClimber() {
+    public void retractClimber(double percentOutput) {
 
         //leftClimber.set(ControlMode.PercentOutput, -0.25);
-        rightClimber.set(ControlMode.PercentOutput, -0.25);
+        rightClimber.set(ControlMode.PercentOutput, percentOutput);
 
     }
 
