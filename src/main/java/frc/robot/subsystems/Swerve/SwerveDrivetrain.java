@@ -95,7 +95,7 @@ public class SwerveDrivetrain extends Subsystem {
   }
 
   public void initSteerMotor(WPI_TalonSRX steerMotor){
-    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 10);
+    steerMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10); //switch to analog if using absoultes
     steerMotor.setSensorPhase(false);
 
     steerMotor.configPeakOutputForward(1, 10);
@@ -105,9 +105,9 @@ public class SwerveDrivetrain extends Subsystem {
     steerMotor.configNominalOutputReverse(0, 10);
 
     frontLeft.setReverseEncoder(true);
-    frontRight.setReverseEncoder(false);
+    frontRight.setReverseEncoder(true);
     rearLeft.setReverseEncoder(true);
-    rearRight.setReverseEncoder(false);
+    rearRight.setReverseEncoder(true);
     
     frontRight.setReverseSteerMotor(true);
     frontLeft.setReverseSteerMotor(true);
@@ -116,7 +116,7 @@ public class SwerveDrivetrain extends Subsystem {
 
     steerMotor.setNeutralMode(NeutralMode.Brake);
 
-    steerMotor.configAllowableClosedloopError(0, 4, 10);
+    steerMotor.configAllowableClosedloopError(0, 1, 10);
 
     steerMotor.config_kP(0, P, 10);
     steerMotor.config_kI(0, I, 10);
@@ -132,6 +132,10 @@ public class SwerveDrivetrain extends Subsystem {
     flSteer.set(ControlMode.Position, 0);
     rrSteer.set(ControlMode.Position, 0);
     rlSteer.set(ControlMode.Position, 0);
+  }
+
+  public void reduceEnc(SwerveModule module) {
+    module.setEncPosition((int)Robot.swerveUtil.modPos(module.getEncPosition(), 1024));
   }
 
   public double getDistance(){

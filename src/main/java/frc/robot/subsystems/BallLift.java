@@ -34,9 +34,9 @@ public class BallLift extends Subsystem {
   private double motorSpeed;
 
   public BallLift() {
-    tolerance = 250;
+    tolerance = 200;
     goalHeight = 0; //temporary value
-    motorSpeed = 0.75; //ranges from -1 to 1
+    motorSpeed = 0.37; //ranges from -1 to 1
     
     motor1 = RobotMap.BallLiftLeft;
     motor2 = RobotMap.BallLiftRight;
@@ -45,7 +45,7 @@ public class BallLift extends Subsystem {
     initMotor(motor2);
 
     //motor2.follow(motor1);
-    motor2.setInverted(TalonFXInvertType.OpposeMaster);
+    //motor2.setInverted(TalonFXInvertType.OpposeMaster);
   }
 
   @Override
@@ -55,7 +55,7 @@ public class BallLift extends Subsystem {
   }
 
   public void initMotor(WPI_TalonFX motor) {
-    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 1, 0);
     motor.setSensorPhase(false);
     //motor.configPeakOutputForward(1, 0);
     //motor.configPeakOutputReverse(-1, 0);
@@ -71,14 +71,14 @@ public class BallLift extends Subsystem {
 
   public void setPosition(double desiredHeight) {
     goalHeight = desiredHeight;
-    if (desiredHeight - getPostion1() < 0){
+    if (goalHeight - getPostion1() < 0){
       motor1.set(-motorSpeed);
-      //motor2.set(-1);
+      motor2.set(motorSpeed * 1.4); // * 1.0296296296
     } else {
       motor1.set(motorSpeed);
-      //motor2.set(1);
+      motor2.set(-motorSpeed * 1.4);
     }
-    motor2.follow(motor1);
+    //motor2.follow(motor1);
     delta();
   }
 
@@ -88,7 +88,7 @@ public class BallLift extends Subsystem {
   }
 
   public boolean delta(){
-    if (getPostion1() - goalHeight < tolerance){
+    if (Math.abs(getPostion1() - goalHeight) < tolerance){
       return true;
     } else {
       return false;

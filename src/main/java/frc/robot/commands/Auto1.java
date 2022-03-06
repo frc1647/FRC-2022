@@ -10,8 +10,8 @@ import frc.robot.commands.Movement.DriveDistance;
 
 public class Auto1 extends CommandGroup {
   
-  private double forwardDistance = 69;
-  private double reverseDistance = 420;
+  private double forwardDistance = 40;
+  private double reverseDistance = 69;
   
   /** Autonomus sequence 1. */
   public Auto1() {
@@ -21,10 +21,10 @@ public class Auto1 extends CommandGroup {
     // these will run in order.
     
 
-    addSequential(new DriveDistance(forwardDistance, false));
-    addSequential(new BallLiftUp()); //BallLiftUp command currently uses non PID method
+    //addSequential(new DriveDistance(forwardDistance, false));
+    addSequential(new SpinIntake(1), 4); //works?
+    //addSequential(new BallLiftUp()); //BallLiftUp command currently uses non PID method
     addSequential(new DriveDistance(reverseDistance, true));
-    addSequential(new SpinIntake(1), 20); //works?
     //addSequential(new IntakeTime(20));
     
 

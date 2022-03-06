@@ -11,14 +11,25 @@ package frc.robot.subsystems.Swerve;
  * Add your docs here.
  */
 public class SwerveUtil {
-    public static double convertEncoderValue(double encoderValue, double gearRatio){
+    public static double convertEncoderValue(double encoderValue){
 		double encPos = encoderValue;
+		double gearRatio = 1024;
 		
 		encPos /= gearRatio; //inputted gearratio is encoder tics per rotate 
 		encPos = encPos % 1;
 		
 		return encPos;
 	}
+
+	public double modPos(double in, double m){
+        double mod = in % m;
+        if(in < 0) {
+            mod += m;
+        } else if(in == m){
+			mod = 0;
+		}
+        return mod;
+    }
 	
 	public static double convertAngle(double angle, double gearRatio){
 		double encVal = angle;

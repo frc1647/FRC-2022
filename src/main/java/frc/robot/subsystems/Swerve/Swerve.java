@@ -34,6 +34,12 @@ public class Swerve {
     }
 
     public void move(double fwd, double str, double rcw, double gyroVal){
+        
+        /*Robot.drivetrain.reduceEnc(module1);
+        Robot.drivetrain.reduceEnc(module2);
+        Robot.drivetrain.reduceEnc(module3);
+        Robot.drivetrain.reduceEnc(module4);*/
+        
         math.move(fwd, str, rcw, gyroVal, swerveDirectives); //this might be redundant
         //Robot.swerveMath.move(fwd, str, rcw, gyroVal, swerveDirectives); //this might be a replacement for everything noted as potentally redundnant
 
@@ -49,6 +55,10 @@ public class Swerve {
         SmartDashboard.putNumber("Fr Speed", swerveDirectives[1].getSpeed());
         SmartDashboard.putNumber("Bl Speed", swerveDirectives[2].getSpeed());
         SmartDashboard.putNumber("Br Speed", swerveDirectives[3].getSpeed());*/
+        SmartDashboard.putNumber("enc angle FL", module1.getEncPosition());
+        SmartDashboard.putNumber("enc angle FR", module2.getEncPosition());
+        SmartDashboard.putNumber("enc angle RL", module3.getEncPosition());
+        SmartDashboard.putNumber("enc angle RR", module4.getEncPosition());
     }
 
     public void stop(){

@@ -32,9 +32,9 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    fwd = -Robot.oi.getLeftJoy().getY(); // - or + ?
-    str = Robot.oi.getLeftJoy().getX(); // was left joy
-    rcw = Robot.oi.getRightJoy().getX(); // was right joy
+    fwd = -Robot.oi.getRightJoy().getY(); // - or + ?
+    str = Robot.oi.getRightJoy().getX(); // was left joy
+    rcw = Robot.oi.getLeftJoy().getX(); // was right joy
 
     //joystick deadzone
 

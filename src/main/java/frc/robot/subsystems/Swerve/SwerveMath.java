@@ -14,6 +14,7 @@ import java.time.Clock;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -108,10 +109,10 @@ public class SwerveMath {
         double rrs = Math.sqrt(Math.pow(a,2)+Math.pow(d,2));
         double rls = Math.sqrt(Math.pow(a,2)+Math.pow(c,2));
 
-        double fra = -Math.atan2(b,c)*180/Math.PI;
+        double fra = Math.atan2(b,c)*180/Math.PI;
         double fla = Math.atan2(b,d)*180/Math.PI;
-        double rra = -Math.atan2(a,d)*180/Math.PI;
-        double rla = Math.atan2(a,c)*180/Math.PI;
+        double rla = Math.atan2(a,d)*180/Math.PI; //rra
+        double rra = Math.atan2(a,c)*180/Math.PI; //rla
         
         //double temp = (fwd*Math.cos(gyro.getAngle())) + str*Math.sin(gyro.getAngle());
         double max = frs; 
@@ -145,9 +146,9 @@ public class SwerveMath {
         */
 
         setDirective(swerveDirectives[0], fra, frs);
-        setDirective(swerveDirectives[1], fla, fls);
+        setDirective(swerveDirectives[1], fla, -fls);
         setDirective(swerveDirectives[2], rra, rrs);
-        setDirective(swerveDirectives[3], rla, rls);
+        setDirective(swerveDirectives[3], rla, -rls);
 
     }
 

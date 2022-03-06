@@ -9,13 +9,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.*;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.BallLiftDown;
 import frc.robot.commands.BallLiftUp;
 import frc.robot.commands.ExtendClimber;
 import frc.robot.commands.RetractClimber;
-import frc.robot.commands.Intake.ExtendIntake;
-import frc.robot.commands.Intake.RetractIntake;
+//import frc.robot.commands.Intake.ExtendIntake;
+//import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
 
 /**
@@ -26,7 +28,8 @@ public class OI {
   
   Joystick leftJoy = RobotMap.leftJoy;
   Joystick rightJoy = RobotMap.rightJoy;
-  Joystick tablet = RobotMap.tablet;
+  XboxController controller = RobotMap.controller;
+  //Joystick tablet = RobotMap.tablet;
 
   public OI(){
     //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
@@ -42,13 +45,30 @@ public class OI {
     //intakeUp.whenPressed(new RetractIntake());
     //intakeDown.whenPressed(new ExtendIntake());
 
-    JoystickButton climbUp = new JoystickButton(leftJoy, 3);
-    JoystickButton climbDown = new JoystickButton(leftJoy, 2);
-    JoystickButton intakeReverse = new JoystickButton(leftJoy, 5);
+    //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
+
+    //JoystickButton climbUp = new JoystickButton(leftJoy, 3);
+    //JoystickButton climbDown = new JoystickButton(leftJoy, 2);
+    JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
     //climbUp.whenPressed(new ExtendClimber());
     //climbDown.whenPressed(new RetractClimber());
     intakeReverse.whileHeld(new SpinIntake(-1));
+
+    //Controller Controller Controller Controller Controller Controller
+    JoystickButton cIntakeSpin = new JoystickButton(controller, 6);
+    JoystickButton cIntakeReverse = new JoystickButton(controller, 5);
+    JoystickButton cLiftBall = new JoystickButton(controller, 4);
+    JoystickButton cLowerBall = new JoystickButton(controller, 1);
+    JoystickButton cClimbUp = new JoystickButton(controller, 3);
+    JoystickButton cClimbDown = new JoystickButton(controller, 2);
+
+    cIntakeSpin.whileHeld(new SpinIntake(1));
+    cIntakeReverse.whileHeld(new SpinIntake(-1));
+    cLiftBall.whenPressed(new BallLiftUp());
+    cLowerBall.whenPressed(new BallLiftDown());
+    cClimbUp.whenPressed(new ExtendClimber());
+    cClimbDown.whenPressed(new RetractClimber());
   
   }
 
@@ -58,9 +78,9 @@ public class OI {
   public Joystick getRightJoy() {
     return rightJoy;
   }
-  public Joystick getTablet(){
+  /*public Joystick getTablet(){
     return tablet;
   
-  }
+  }*/
   
 }

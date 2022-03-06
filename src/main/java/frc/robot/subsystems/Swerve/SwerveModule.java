@@ -35,14 +35,14 @@ public class SwerveModule {
     private boolean reverseEncoder = false;
     private boolean reverseSteer = false;
 
-    public SwerveModule(String name, BaseMotorController drive, BaseMotorController steer, double gearRatio){
+    public SwerveModule(String name, BaseMotorController drive, WPI_TalonSRX steer, double gearRatio){
         this.name = name;
         driveMotor = drive;
         steerMotor = steer;
         this.gearRatio = gearRatio;
     }
 
-    private double encTicPerRotate = 1660;
+    private double encTicPerRotate = /*1024*/ 1660;
 
     public void stop(){
         driveMotor.set(ControlMode.PercentOutput, 0);
@@ -64,9 +64,9 @@ public class SwerveModule {
         steerMotor.set(ControlMode.Position, (reverseEncoder ? -1 : 1) * angle * encTicPerRotate);
     }
 
-    public void setEncoder(int postion){
+    /*public void setEncoder(int postion){
         steerMotor.setSelectedSensorPosition(postion, 0, 10);
-    }
+    } */
 
     public BaseMotorController getDrive(){
         return driveMotor;
@@ -102,7 +102,7 @@ public class SwerveModule {
     //checks if the wheel is at a spot to reverse to get to desired direction
     //The subsequent set and get angles all work towards making sure the wheel will turn the right direction
     public boolean shouldReverse(double angle, double encoderValue){
-        double ea = SwerveUtil.convertEncoderValue(encoderValue, encTicPerRotate);
+        double ea = SwerveUtil.convertEncoderValue(encoderValue);
 
         if(angle < 0) angle += 1;
         

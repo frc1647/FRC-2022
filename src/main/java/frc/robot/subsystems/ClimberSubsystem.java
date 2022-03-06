@@ -27,16 +27,17 @@ public class ClimberSubsystem extends Subsystem{
     }
 
     public ClimberSubsystem() {
-        //leftClimber = RobotMap.leftClimber;
+        
         rightClimber = RobotMap.rightClimber;
+        rightClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 2, 0);
+        rightClimber.setSensorPhase(false);
+        rightClimber.setNeutralMode(NeutralMode.Brake);
 
+        //leftClimber = RobotMap.leftClimber;
         //leftClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
-        //rightClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
         //leftClimber.setSensorPhase(true);
-        //rightClimber.setSensorPhase(false);
         //leftClimber.setNeutralMode(NeutralMode.Brake);
-        //rightClimber.setNeutralMode(NeutralMode.Brake);
-
+        
         //initMotor(leftClimber);
         initMotor(rightClimber);
 

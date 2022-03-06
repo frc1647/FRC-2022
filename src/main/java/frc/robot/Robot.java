@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
   public static SwerveDirective directive = new SwerveDirective();
   public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
+  public static SwerveUtil swerveUtil = new SwerveUtil();
   public static String mode;
   //public static Timer m_timer = new Timer();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
@@ -73,7 +74,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    usbCam = CameraServer.startAutomaticCapture();
+    //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
+    //drivetrain.resetDriveEnc();
   }
 
   /**
@@ -120,6 +122,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    usbCam = CameraServer.startAutomaticCapture();
   }
 
   /** This function is called periodically during operator control. */
