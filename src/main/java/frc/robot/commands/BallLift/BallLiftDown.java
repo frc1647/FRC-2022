@@ -10,10 +10,10 @@ package frc.robot.commands.BallLift;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class BallLiftDownLeft extends Command {
-
-  /** lowers the cargo elevator all the way down. */
-  public BallLiftDownLeft() {
+public class BallLiftDown extends Command {
+  
+  /** Lifts the cargo elevator up to unload cargo. */
+  public BallLiftDown() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballLift);
   }
@@ -25,7 +25,7 @@ public class BallLiftDownLeft extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.ballLift.setPosition(0, Robot.ballLift.getLeftMotor());
+    Robot.ballLift.liftDown(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

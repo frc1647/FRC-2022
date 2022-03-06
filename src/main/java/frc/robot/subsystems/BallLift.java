@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ResourceBundle.Control;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
@@ -69,32 +71,22 @@ public class BallLift extends Subsystem {
     motor.config_kD(1, 0.0, 0);
   }
 
-  public void setPosition(double desiredHeight, WPI_TalonFX motor) {
-    goalHeight = desiredHeight;
-    if (goalHeight - motor.getSelectedSensorPosition() < 0){
-      motor.set(-motorSpeed);
-      //motor2.set(motorSpeed * 1.4); // * 1.0296296296
-    } else {
-      motor.set(motorSpeed);
-      //motor2.set(motorSpeed * 1.4);
-    }
-    //motor2.follow(motor1);
-    delta(motor);
+  public void LiftUp(int leftHeight, int rightHeight) {
+
+    getLeftMotor().set(ControlMode.Position, leftHeight);
+    getRightMotor().set(ControlMode.Position, rightHeight);
+
   }
 
-  public void setPosition2(double desiredHeight, WPI_TalonFX motor) { //not used in the commands, but would be a better implementation if it works
-    goalHeight = desiredHeight;
-    motor.set(ControlMode.Position, goalHeight);
+  public void liftDown(double desiredHeight) {
+
+    getLeftMotor().set(ControlMode.Position, desiredHeight);
+    getRightMotor().set(ControlMode.Position, desiredHeight);
   }
 
-  public void delta(WPI_TalonFX motor){
-    if (Math.abs(motor.getSelectedSensorPosition() - goalHeight) < tolerance){
-      stopMotor(motor);
-    }
-  }
-
-  public void stopMotor(WPI_TalonFX motor){
-    motor.set(ControlMode.PercentOutput, 0);
+  public void stopMotors(WPI_TalonFX motor){
+    getLeftMotor().set(ControlMode.PercentOutput, 0);
+    getRightMotor().set(ControlMode.PercentOutput, 0);
   }
 
   
