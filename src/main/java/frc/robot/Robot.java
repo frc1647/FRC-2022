@@ -30,6 +30,7 @@ import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.BallLift;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.OI;
+import frc.robot.RobotMap;
 
 import frc.robot.commands.*;
 import frc.robot.commands.Movement.*;
@@ -53,6 +54,8 @@ public class Robot extends TimedRobot {
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static UsbCamera usbCam;
+
+  public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
   
   public static OI oi;
   Command m_autonomousCommand;
@@ -63,6 +66,9 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   */
+
+  public static double zeroHeading;
+  public static double zeroAngle;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -76,6 +82,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
     //drivetrain.resetDriveEnc();
+    zeroHeading = RobotMap.navx.getFusedHeading();
+    zeroAngle = RobotMap.navx.getAngle();
   }
 
   /**
@@ -87,7 +95,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    
+    //update smartdashboard values from NewSwerve here
   }
 
   /**
