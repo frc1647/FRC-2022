@@ -28,7 +28,7 @@ public class ExtendClimber extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
     
 }

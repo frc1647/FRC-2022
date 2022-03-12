@@ -50,7 +50,7 @@ public class RobotMap {
   public static WPI_TalonFX BallLiftRight = new WPI_TalonFX(16);
 
   // Others
-  public static Encoder leftClimberEncoder = new Encoder(0, 1);
+  //public static Encoder leftClimberEncoder = new Encoder(0, 1);
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
