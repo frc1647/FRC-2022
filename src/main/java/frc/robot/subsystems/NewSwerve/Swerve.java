@@ -39,9 +39,9 @@ public class Swerve extends Subsystem {
     private final double encoderTicsPerRotation = 1024;
 
     // ADJUST PIDS HERE
-    private final double P = 0.0;
+    private final double P = 2.0;
     private final double I = 0.0;
-    private final double D = 0.0;
+    private final double D = 1.0;
 
     private SwerveModule frontRight;
     private SwerveModule frontLeft;
@@ -50,10 +50,10 @@ public class Swerve extends Subsystem {
 
     public Swerve() {
         init();
-        frontRight = new SwerveModule(frDrive, frSteer);
-        frontLeft = new SwerveModule(flDrive, flSteer);
-        rearRight = new SwerveModule(rrDrive, rrSteer);
-        rearLeft = new SwerveModule(rlDrive, rlSteer);
+        frontRight = new SwerveModule(frDrive, frSteer, encoderTicsPerRotation);
+        frontLeft = new SwerveModule(flDrive, flSteer, encoderTicsPerRotation);
+        rearRight = new SwerveModule(rrDrive, rrSteer, encoderTicsPerRotation);
+        rearLeft = new SwerveModule(rlDrive, rlSteer, encoderTicsPerRotation);
     }
 
     // ADJUST SWERVE MODULE SETTINGS HERE
@@ -65,8 +65,8 @@ public class Swerve extends Subsystem {
 
         initSteerMotor(frSteer, true, true);
         initSteerMotor(flSteer, true, true);
-        initSteerMotor(rrSteer, true, true);
-        initSteerMotor(rlSteer, true, true);
+        initSteerMotor(rrSteer, true, false);
+        initSteerMotor(rlSteer, true, false);
     }
 
     private void initDriveMotor(BaseMotorController motor, boolean invert) {
@@ -86,9 +86,9 @@ public class Swerve extends Subsystem {
         motor.config_kI(0, I, 0);
         motor.config_kD(0, D, 0);
 
-        motor.config_IntegralZone(0, 100, 0);
+        //motor.config_IntegralZone(0, 100, 0);
         motor.configAllowableClosedloopError(0, 5, 0);
-        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
+        //motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
     }
 
     public void SwerveDrive(double strafe, double forward, double omega) {
@@ -113,10 +113,10 @@ public class Swerve extends Subsystem {
         // Compute angles for the steering motors
         // When drives are calibrated for zero position on encoders they can be at 90 degrees (or maybe some other angle) to the front of the robot.
         // Subtract and add 90 degrees to steering calculation to offset for initial position/calibration of drives if the drive zero position faces the side of the robot.
-        double frAngle = Math.toDegrees(Math.atan2(B, C)) + 90;
-        double flAngle = Math.toDegrees(Math.atan2(B, D)) + 90;
-        double rrAngle = Math.toDegrees(Math.atan2(A, C)) - 90;
-        double rlAngle = Math.toDegrees(Math.atan2(A, D)) - 90;
+        double frAngle = Math.toDegrees(Math.atan2(B, C)) + 0;
+        double flAngle = Math.toDegrees(Math.atan2(B, D)) + 0;
+        double rrAngle = Math.toDegrees(Math.atan2(A, C)) - 0;
+        double rlAngle = Math.toDegrees(Math.atan2(A, D)) - 0;
         // ABOVE ANGLE OFFSETS ARE TEMPORARY
 
         double maxSpeed = Collections.max(Arrays.asList(frSpeed, flSpeed, rrSpeed, rlSpeed, 1.0));

@@ -18,10 +18,10 @@ public class SwerveModule {
     private double encoderTics;
     private double targetPos;
 
-    public SwerveModule(BaseMotorController drive, WPI_TalonSRX steer) {
+    public SwerveModule(BaseMotorController drive, WPI_TalonSRX steer, double encTics) {
         this.driveMotor = drive;
         this.steerMotor = steer;
-        this.encoderTics = Robot.SwerveDrive.getEncoderTicsPerRotation();
+        this.encoderTics = encTics;
     }
 
     private void setSpeed(double speed) {

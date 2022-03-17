@@ -9,7 +9,7 @@ package frc.robot.commands.Movement;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Swerve.*;
+//import frc.robot.subsystems.Swerve.*;
 import frc.robot.OI;
 
 public class Drive extends Command {
@@ -21,7 +21,7 @@ public class Drive extends Command {
   public Drive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.drivetrain);
+    requires(Robot.SwerveDrive);
   }
 
   // Called just before this Command runs the first time

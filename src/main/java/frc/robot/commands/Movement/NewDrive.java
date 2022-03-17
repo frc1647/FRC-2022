@@ -10,7 +10,7 @@ import frc.robot.RobotMap;
 
 public class NewDrive extends Command {
 
-  public static final double deadzone = 0.05;
+  public static final double deadzone = 0.1;
   public static final double rcwScale = 0.5;
 
   private double originHeading = 0.0;

@@ -10,8 +10,8 @@ package frc.robot.commands.Movement;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Swerve.SwerveMath;
-import frc.robot.subsystems.Swerve.CentricMode;
+//import frc.robot.subsystems.Swerve.SwerveMath;
+//import frc.robot.subsystems.Swerve.CentricMode;
 import frc.robot.OI;
 
 /**
@@ -21,7 +21,7 @@ public class SwapCentricMode extends Command {
 
   public SwapCentricMode() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
+    requires(Robot.SwerveDrive);
   }
 
   // Called just before this Command runs the first time
@@ -34,14 +34,14 @@ public class SwapCentricMode extends Command {
   protected void execute() {
     //method 1
     //Robot.drivetrain.toggleMode();
-
+    /*
     //4048 method
     CentricMode mode = Robot.drivetrain.getModeRobot();
     if (mode == CentricMode.Robot){
       Robot.drivetrain.setModeField();
     } else {
       Robot.drivetrain.setModeRobot();
-    }
+    }*/
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override
