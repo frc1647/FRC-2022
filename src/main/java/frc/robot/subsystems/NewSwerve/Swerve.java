@@ -41,7 +41,7 @@ public class Swerve extends Subsystem {
     // ADJUST PIDS HERE
     private final double P = 2.0;
     private final double I = 0.0;
-    private final double D = 1.0;
+    private final double D = 0.03;
 
     private SwerveModule frontRight;
     private SwerveModule frontLeft;
@@ -49,11 +49,11 @@ public class Swerve extends Subsystem {
     private SwerveModule rearLeft;
 
     public Swerve() {
-        init();
         frontRight = new SwerveModule(frDrive, frSteer, encoderTicsPerRotation);
         frontLeft = new SwerveModule(flDrive, flSteer, encoderTicsPerRotation);
         rearRight = new SwerveModule(rrDrive, rrSteer, encoderTicsPerRotation);
         rearLeft = new SwerveModule(rlDrive, rlSteer, encoderTicsPerRotation);
+        init();
     }
 
     // ADJUST SWERVE MODULE SETTINGS HERE
@@ -65,8 +65,8 @@ public class Swerve extends Subsystem {
 
         initSteerMotor(frSteer, true, true);
         initSteerMotor(flSteer, true, true);
-        initSteerMotor(rrSteer, true, false);
-        initSteerMotor(rlSteer, true, false);
+        initSteerMotor(rrSteer, false, true);
+        initSteerMotor(rlSteer, false, true);
     }
 
     private void initDriveMotor(BaseMotorController motor, boolean invert) {
@@ -86,15 +86,19 @@ public class Swerve extends Subsystem {
         motor.config_kI(0, I, 0);
         motor.config_kD(0, D, 0);
 
-        //motor.config_IntegralZone(0, 100, 0);
+        motor.config_IntegralZone(0, 100, 0);
         motor.configAllowableClosedloopError(0, 5, 0);
-        //motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
     }
 
     public void SwerveDrive(double strafe, double forward, double omega) {
         double diagonal = Math.hypot(length, width); //value should be identical to the one produced by our old code
         //double diagonal = Math.sqrt(Math.pow(length, 2) + Math.pow(width, 2)); //value in our old code
         //double diagonal = 2.0; //value in cybersonics' code
+
+        //PURELY FOR TESTING
+        omega = 0;
+
         double omegaLD = omega * (length / diagonal);
         double omegaWD = omega * (width / diagonal);
 

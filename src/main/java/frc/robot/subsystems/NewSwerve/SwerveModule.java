@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 /** Add your docs here. */
@@ -35,17 +36,19 @@ public class SwerveModule {
     public void move(double speed, double angle) {
         double currentPos = steerMotor.getSelectedSensorPosition(0);
         double currentAngle = (currentPos / encoderTics * 360.0) % 360;
-        // converts 0 360 angles to -180 180 angles
-        if (currentAngle < 180.0) {
+        // converts -360 360 angles to -180 180 angles
+        if (currentAngle > 180.0) {
             currentAngle -= 360.0;
+        } else if (currentAngle <= -180.0) { //might just be <, not <=
+            currentAngle += 360.0;
         }
         //angle = -angle;
         double deltaDegrees = currentAngle - angle;
         // If we need to turn more than 180 degrees, it's faster to turn in the opposite direction
-        if (Math.abs(deltaDegrees) > 90.0) {
+        /*if (Math.abs(deltaDegrees) > 90.0) {
             deltaDegrees -= 180.0 * Math.signum(deltaDegrees);
             speed = -speed;
-        }
+        }*/
         targetPos = currentPos + deltaDegrees * encoderTics / 360.0;
         setAngle(targetPos);
         setSpeed(speed);

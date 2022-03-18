@@ -29,6 +29,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 //import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.BallLift;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.NewSwerve.Swerve;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 
@@ -43,19 +44,15 @@ import frc.robot.commands.Movement.*;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  //public static SwerveDrivetrain drivetrain = new SwerveDrivetrain();
-  //public static SwerveDirective directive = new SwerveDirective();
-  //public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
-  //public static SwapCentricMode swapCentricMode = new SwapCentricMode();
-  //public static SwerveUtil swerveUtil = new SwerveUtil();
   public static String mode;
+  public static Swerve SwerveDrive = new Swerve();
   //public static Timer m_timer = new Timer();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static UsbCamera usbCam;
 
-  public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
+  //public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
   
   public static OI oi;
   Command m_autonomousCommand;
@@ -96,6 +93,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //update smartdashboard values from NewSwerve here
+    SmartDashboard.putNumber("front left pos", SwerveDrive.getFrontLeftModule().getCurrentPos());
+    SmartDashboard.putNumber("front right pos", SwerveDrive.getFrontRightModule().getCurrentPos());
+    SmartDashboard.putNumber("rear left pos", SwerveDrive.getRearLeftModule().getCurrentPos());
+    SmartDashboard.putNumber("rear right pos", SwerveDrive.getRearRightModule().getCurrentPos());
   }
 
   /**

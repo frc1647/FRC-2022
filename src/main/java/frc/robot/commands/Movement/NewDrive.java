@@ -37,30 +37,30 @@ public class NewDrive extends Command {
   @Override
   protected void execute() {
     /*if (Robot.oi.getLeftJoyButton(7)) {
-			originHeading = RobotMap.navX.getFusedHeading();
-		}*/
+		originHeading = RobotMap.navX.getFusedHeading();
+	}*/
 
-		double originOffset = 360 - originHeading;
-		originCorr = RobotMap.navx.getFusedHeading() + originOffset;
+	double originOffset = 360 - originHeading;
+	originCorr = RobotMap.navx.getFusedHeading() + originOffset;
 
     fwd = -Robot.oi.getRightJoy().getY(); // - or + ?
     str = Robot.oi.getRightJoy().getX(); // was left joy
     rcw = Robot.oi.getLeftJoy().getX(); // was right joy
-
-    //makes joysticcs values a parabola, while maintaining negative values
-    fwd = Math.pow(fwd, strfwdPow) * Math.signum(fwd);
-    str = Math.pow(str, strfwdPow) * Math.signum(str);
-    rcw = Math.pow(rcw, rcwPow) * Math.signum(rcw) * rcwScale;
-
-    if (Math.abs(str) < Math.pow(deadzone, strfwdPow)) {
+    
+    if (Math.abs(str) < deadzone) {
       str = 0.0;
     }
-		if (Math.abs(fwd) < Math.pow(deadzone, strfwdPow)) {
+	if (Math.abs(fwd) < deadzone) {
       fwd = 0.0;
     }
-		if (Math.abs(rcw) < Math.pow(deadzone, rcwPow) * rcwScale) {
+	if (Math.abs(rcw) < deadzone) {
       rcw = 0.0;
     }
+
+    //makes joysticcs values a parabola, while maintaining negative values
+    fwd = Math.abs(Math.pow(fwd, strfwdPow)) * Math.signum(fwd);
+    str = Math.abs(Math.pow(str, strfwdPow)) * Math.signum(str);
+    rcw = Math.abs(Math.pow(rcw, rcwPow)) * Math.signum(rcw) * rcwScale;
 
     /* //commented out until we get a working navx
     if (!Robot.oi.getLeftJoy().getTrigger()) {
@@ -92,7 +92,6 @@ public class NewDrive extends Command {
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
-    end();
-  }
+  protected void interrupted() {}
+
 }
