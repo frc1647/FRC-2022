@@ -31,6 +31,8 @@ public class ClimberSubsystem extends Subsystem{
 
     public ClimberSubsystem() {
         
+        rightClimber = RobotMap.rightClimber;
+        rightClimber.configFactoryDefault();
         //initMotor(leftClimber);
         initMotor(rightClimber);
 
