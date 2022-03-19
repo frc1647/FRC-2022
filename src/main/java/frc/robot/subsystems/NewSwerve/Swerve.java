@@ -41,7 +41,7 @@ public class Swerve extends Subsystem {
     // ADJUST PIDS HERE
     private final double P = 2.0;
     private final double I = 0.0;
-    private final double D = 0.03;
+    private final double D = 0.0;
 
     private SwerveModule frontRight;
     private SwerveModule frontLeft;
@@ -63,10 +63,11 @@ public class Swerve extends Subsystem {
         initDriveMotor(rrDrive, false);
         initDriveMotor(rlDrive, false);
 
-        initSteerMotor(frSteer, true, true);
-        initSteerMotor(flSteer, true, true);
-        initSteerMotor(rrSteer, false, true);
-        initSteerMotor(rlSteer, false, true);
+        boolean invertSensorPhase = true;
+        initSteerMotor(frSteer, true, invertSensorPhase);
+        initSteerMotor(flSteer, true, invertSensorPhase);
+        initSteerMotor(rrSteer, false, invertSensorPhase);
+        initSteerMotor(rlSteer, false, invertSensorPhase);
     }
 
     private void initDriveMotor(BaseMotorController motor, boolean invert) {

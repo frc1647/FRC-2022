@@ -50,10 +50,10 @@ public class NewDrive extends Command {
     if (Math.abs(str) < deadzone) {
       str = 0.0;
     }
-	if (Math.abs(fwd) < deadzone) {
+	  if (Math.abs(fwd) < deadzone) {
       fwd = 0.0;
     }
-	if (Math.abs(rcw) < deadzone) {
+	  if (Math.abs(rcw) < deadzone) {
       rcw = 0.0;
     }
 

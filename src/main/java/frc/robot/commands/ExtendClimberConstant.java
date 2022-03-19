@@ -28,7 +28,12 @@ public class ExtendClimberConstant extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
     }
     
 }

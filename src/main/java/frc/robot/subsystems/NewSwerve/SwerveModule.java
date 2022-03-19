@@ -23,6 +23,7 @@ public class SwerveModule {
         this.driveMotor = drive;
         this.steerMotor = steer;
         this.encoderTics = encTics;
+        //this.move(0, 0); // way to move the modules to face their zero position at code start
     }
 
     private void setSpeed(double speed) {
@@ -42,14 +43,13 @@ public class SwerveModule {
         } else if (currentAngle <= -180.0) { //might just be <, not <=
             currentAngle += 360.0;
         }
-        //angle = -angle;
-        double deltaDegrees = currentAngle - angle;
+        double deltaDegrees = (currentAngle - angle) * -1; //i.e. a -180 degree delta means the target angle is 180 degrees behind the current angle
         // If we need to turn more than 180 degrees, it's faster to turn in the opposite direction
         /*if (Math.abs(deltaDegrees) > 90.0) {
             deltaDegrees -= 180.0 * Math.signum(deltaDegrees);
             speed = -speed;
         }*/
-        targetPos = currentPos + deltaDegrees * encoderTics / 360.0;
+        targetPos = currentPos + deltaDegrees * encoderTics / 360.0; //in encoder tics
         setAngle(targetPos);
         setSpeed(speed);
     }
