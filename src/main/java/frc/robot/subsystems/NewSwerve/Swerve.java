@@ -39,7 +39,7 @@ public class Swerve extends Subsystem {
     private final double encoderTicsPerRotation = 1024;
 
     // ADJUST PIDS HERE
-    private final double P = 10.0;
+    private final double P = 9.0;
     private final double I = 0.0;
     private final double D = 10.0;
 
@@ -118,8 +118,8 @@ public class Swerve extends Subsystem {
         // Compute angles for the steering motors
         // When drives are calibrated for zero position on encoders they can be at 90 degrees (or maybe some other angle) to the front of the robot.
         // Subtract and add 90 degrees to steering calculation to offset for initial position/calibration of drives if the drive zero position faces the side of the robot.
-        double frAngle = Math.toDegrees(Math.atan2(B, C)) + 0;//76.99;
-        double flAngle = Math.toDegrees(Math.atan2(B, D)) - 0;//2.46;
+        double frAngle = Math.toDegrees(Math.atan2(B, C)) - 0;//12.66;//76.99;
+        double flAngle = Math.toDegrees(Math.atan2(B, D)) - 39.38;//35.16;//2.46;
         double rrAngle = Math.toDegrees(Math.atan2(A, C)) + 0;//152.93;
         double rlAngle = Math.toDegrees(Math.atan2(A, D)) + 0;//156.45;
         // ABOVE ANGLE OFFSETS ARE TEMPORARY
@@ -130,10 +130,10 @@ public class Swerve extends Subsystem {
         rrSpeed /= maxSpeed;
         rlSpeed /= maxSpeed;
 
-        frontRight.move2(frSpeed, frAngle);
-        frontLeft.move2(flSpeed, flAngle);
-        rearRight.move2(rrSpeed, rrAngle);
-        rearLeft.move2(rlSpeed, rlAngle);
+        frontRight.move3(frSpeed, frAngle);
+        frontLeft.move3(flSpeed, flAngle);
+        rearRight.move3(rrSpeed, rrAngle);
+        rearLeft.move3(rlSpeed, rlAngle);
     }
 
     public double getMaxSpeed() {
