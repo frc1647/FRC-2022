@@ -54,10 +54,18 @@ public class OI {
 
     JoystickButton climbUp = new JoystickButton(leftJoy, 3);
     JoystickButton climbDown = new JoystickButton(leftJoy, 2);
+    JoystickButton leftballUpConstant = new JoystickButton(leftJoy, 6);
+    JoystickButton leftballDownConstant = new JoystickButton(leftJoy, 7);
+    JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
+    JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
     //JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
     climbUp.whenPressed(new ExtendClimber());
     climbDown.whenPressed(new RetractClimber());
+    leftballUpConstant.whileHeld(new LeftConstant(false));
+    leftballDownConstant.whileHeld(new LeftConstant(true));
+    rightballUpConstant.whileHeld(new RightConstant(false));
+    rightballDownConstant.whileHeld(new RightConstant(true));
     //intakeReverse.whileHeld(new SpinIntake(-1));
 
     /*

@@ -18,7 +18,7 @@ import frc.robot.RobotMap;
 
 public class ClimberSubsystem extends Subsystem{
 
-    //private WPI_TalonFX leftClimber;
+    private WPI_TalonFX leftClimber;
     private WPI_TalonFX rightClimber;
 
     private double extendPosition;
@@ -33,14 +33,15 @@ public class ClimberSubsystem extends Subsystem{
         
         rightClimber = RobotMap.rightClimber;
         rightClimber.configFactoryDefault();
-        //initMotor(leftClimber);
+        leftClimber = RobotMap.leftClimber;
+        initMotor(leftClimber);
         initMotor(rightClimber);
 
         //rightClimber.follow(leftClimber);
         //rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
-        extendPosition = -344500;
-        retractPosition = -150000;
+        extendPosition = 0;//-344500;
+        retractPosition = 0;//-150000;
     }
 
     public void initMotor(WPI_TalonFX motor) {
@@ -60,24 +61,24 @@ public class ClimberSubsystem extends Subsystem{
     
     public void stopClimber() {
 
-        //leftClimber.set(ControlMode.PercentOutput, 0);
+        leftClimber.set(ControlMode.PercentOutput, 0);
         rightClimber.set(ControlMode.PercentOutput, 0);
 
     }
     
-    public void extendClimber(double percentOutput) {
+    public void moveClimber(double percentOutput) {
 
-        //leftClimber.set(ControlMode.PercentOutput, 0.5);
+        leftClimber.set(ControlMode.PercentOutput, percentOutput * -1);
         rightClimber.set(ControlMode.PercentOutput, percentOutput);
 
     }
 
-    public void retractClimber(double percentOutput) {
+    /*public void retractClimber(double percentOutput) {
 
-        //leftClimber.set(ControlMode.PercentOutput, -0.25);
+        leftClimber.set(ControlMode.PercentOutput, percentOutput * -1);
         rightClimber.set(ControlMode.PercentOutput, percentOutput);
 
-    }
+    }*/
     
     /** Moves the climber to a set postion.
      * 
@@ -89,7 +90,8 @@ public class ClimberSubsystem extends Subsystem{
         double setPosition = retract ? extendPosition:retractPosition;
         rightClimber.set(ControlMode.Position, (int)setPosition);
 
-        SmartDashboard.putNumber("Climber height", rightClimber.getSelectedSensorPosition());
+        SmartDashboard.putNumber("right Climber height", rightClimber.getSelectedSensorPosition());
+        SmartDashboard.putNumber("left Climber height", leftClimber.getSelectedSensorPosition());
         SmartDashboard.putNumber("Target height", setPosition);
     }
 

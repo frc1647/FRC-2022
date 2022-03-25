@@ -65,7 +65,7 @@ public class BallLift extends Subsystem {
     //motor.configNominalOutputForward(0, 0);
     //motor.configNominalOutputReverse(0, 0);
     motor.setNeutralMode(NeutralMode.Brake);
-    motor.configAllowableClosedloopError(0, 4, 10);
+    motor.configAllowableClosedloopError(0, 4, 0);
 
     motor.config_kP(0, 1.0, 0);
     motor.config_kI(0, 0.0, 0);
@@ -77,7 +77,14 @@ public class BallLift extends Subsystem {
     getRightMotor().set(ControlMode.Position, rightHeight);
     SmartDashboard.putNumber("LeftLift height", getPositionLeft());
     SmartDashboard.putNumber("RightLift height", getPositionRight());
+  }
 
+  public void leftConst(double speed) {
+    getLeftMotor().set(ControlMode.PercentOutput, speed);
+  }
+
+  public void rightConst(double speed) {
+    getRightMotor().set(ControlMode.PercentOutput, speed);
   }
 
   public void stopMotors(WPI_TalonFX motor) {

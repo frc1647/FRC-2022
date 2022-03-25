@@ -55,10 +55,10 @@ public class RobotMap {
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
   // Climber
-  //public static WPI_TalonFX leftClimber = new WPI_TalonFX(11); //Falcon 500
+  public static WPI_TalonFX leftClimber = new WPI_TalonFX(13); //Falcon 500
   public static WPI_TalonFX rightClimber = new WPI_TalonFX(12); //Falcon 500
 
   // Intake
-  //public static WPI_TalonFX intakePosition = new WPI_TalonFX(13);
+  //public static WPI_TalonFX intakePosition = new WPI_TalonFX(11);
   public static WPI_TalonSRX intakeSpin = new WPI_TalonSRX(15);
 }

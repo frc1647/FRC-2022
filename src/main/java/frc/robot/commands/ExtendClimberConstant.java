@@ -12,13 +12,11 @@ public class ExtendClimberConstant extends Command {
     }
 
     @Override
-    protected void initialize() {
-
-    }
+    protected void initialize() {}
 
     @Override
     protected void execute() {
-        Robot.ClimberSubsystem.extendClimber(0.25);
+        Robot.ClimberSubsystem.moveClimber(0.25);
     }
 
     @Override
