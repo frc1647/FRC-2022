@@ -25,7 +25,7 @@ public class BallLiftUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.ballLift.LiftMove(-50000, -50000);
+    Robot.ballLift.LiftMove(-89000, 89000);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,8 @@ public class BallLiftUp extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.ballLift.stopBallLift();
+    Robot.ballLift.stopLeftLift();
+    Robot.ballLift.stopRightLift();
   }
 
   // Called when another command which requires one or more of the same
@@ -45,5 +46,6 @@ public class BallLiftUp extends Command {
   @Override
   protected void interrupted() {
     //Robot.ballLift.stopBallLift();
+    end();
   }
 }

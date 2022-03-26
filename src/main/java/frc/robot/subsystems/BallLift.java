@@ -60,14 +60,14 @@ public class BallLift extends Subsystem {
   public void initMotor(WPI_TalonFX motor) {
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     motor.setSensorPhase(false);
-    //motor.configPeakOutputForward(1, 0);
-    //motor.configPeakOutputReverse(-1, 0);
+    motor.configPeakOutputForward(0.4, 0);
+    motor.configPeakOutputReverse(-0.4, 0);
     //motor.configNominalOutputForward(0, 0);
     //motor.configNominalOutputReverse(0, 0);
     motor.setNeutralMode(NeutralMode.Brake);
     motor.configAllowableClosedloopError(0, 4, 0);
 
-    motor.config_kP(0, 1.0, 0);
+    motor.config_kP(0, 0.5, 0);
     motor.config_kI(0, 0.0, 0);
     motor.config_kD(0, 0.0, 0);
   }
@@ -87,11 +87,18 @@ public class BallLift extends Subsystem {
     getRightMotor().set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopMotors(WPI_TalonFX motor) {
+  public void stopMotors() {
     getLeftMotor().set(ControlMode.PercentOutput, 0);
     getRightMotor().set(ControlMode.PercentOutput, 0);
   }
 
+  public void stopLeftLift() {
+    getLeftMotor().stopMotor();
+  }
+
+  public void stopRightLift() {
+    getRightMotor().stopMotor();
+  }
   
   public double getPositionLeft(){
     return BallmotorLeft.getSelectedSensorPosition(0);

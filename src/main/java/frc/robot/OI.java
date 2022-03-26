@@ -12,11 +12,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.*;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ExtendClimber;
-import frc.robot.commands.ExtendClimberConstant;
-import frc.robot.commands.RetractClimber;
-import frc.robot.commands.RetractClimberConstant;
+import frc.robot.commands.StopMechanisims;
 import frc.robot.commands.BallLift.*;
+import frc.robot.commands.Climber.ExtendClimber;
+import frc.robot.commands.Climber.ExtendClimberConstant;
+import frc.robot.commands.Climber.RetractClimber;
+import frc.robot.commands.Climber.RetractClimberConstant;
 //import frc.robot.commands.Intake.ExtendIntake;
 //import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
@@ -58,6 +59,7 @@ public class OI {
     JoystickButton leftballDownConstant = new JoystickButton(leftJoy, 7);
     JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
     JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
+    JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
     //JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
     climbUp.whenPressed(new ExtendClimber());
@@ -66,6 +68,7 @@ public class OI {
     leftballDownConstant.whileHeld(new LeftConstant(true));
     rightballUpConstant.whileHeld(new RightConstant(false));
     rightballDownConstant.whileHeld(new RightConstant(true));
+    stopMechanisims.whenPressed(new StopMechanisims());
     //intakeReverse.whileHeld(new SpinIntake(-1));
 
     /*

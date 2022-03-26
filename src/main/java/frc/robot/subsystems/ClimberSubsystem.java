@@ -34,6 +34,7 @@ public class ClimberSubsystem extends Subsystem{
         rightClimber = RobotMap.rightClimber;
         rightClimber.configFactoryDefault();
         leftClimber = RobotMap.leftClimber;
+        leftClimber.configFactoryDefault();
         initMotor(leftClimber);
         initMotor(rightClimber);
 
@@ -52,7 +53,7 @@ public class ClimberSubsystem extends Subsystem{
         //motor.configNominalOutputForward(0, 0);
         //motor.configNominalOutputReverse(0, 0);
         motor.setNeutralMode(NeutralMode.Brake);
-        motor.configAllowableClosedloopError(2, 4, 10);
+        motor.configAllowableClosedloopError(0, 4, 0);
         // NEED TO TUNE THESE
         motor.config_kP(0, 1.5, 0);
         motor.config_kI(0, 0.0, 0);
@@ -68,8 +69,8 @@ public class ClimberSubsystem extends Subsystem{
     
     public void moveClimber(double percentOutput) {
 
-        leftClimber.set(ControlMode.PercentOutput, percentOutput * -1);
-        rightClimber.set(ControlMode.PercentOutput, percentOutput);
+        leftClimber.set(ControlMode.PercentOutput, percentOutput);
+        rightClimber.set(ControlMode.PercentOutput, percentOutput * -1);
 
     }
 
@@ -97,7 +98,7 @@ public class ClimberSubsystem extends Subsystem{
 
     public void resetClimber() {
 
-        //leftClimber.set(ControlMode.Position, 0);
+        leftClimber.set(ControlMode.Position, 0);
         rightClimber.set(ControlMode.Position, 0);
 
     }

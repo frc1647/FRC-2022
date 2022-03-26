@@ -23,8 +23,8 @@ public class SwerveModule {
         this.driveMotor = drive;
         this.steerMotor = steer;
         this.encoderTics = encTics;
-        //this.move(0, 0); // way to move the modules to face their zero position at code start
-        this.setAngle(0);
+        this.move(0, 0); // way to move the modules to face their zero position at code start
+        //this.setAngle(0);
     }
 
     private void setSpeed(double speed) {
@@ -79,10 +79,10 @@ public class SwerveModule {
         }
 
         double deltaTics = (convPos - convAngle) * -1;
-        if (Math.abs(deltaTics) > 256.0) {
+        /*if (Math.abs(deltaTics) > 256.0) {
             deltaTics -= 512.0 * Math.signum(deltaTics);
             speed = -speed;
-        }
+        }*/
         targetPos = deltaTics + currentPos;
 
         setAngle(targetPos);
@@ -95,6 +95,11 @@ public class SwerveModule {
 
     public double getCurrentPos() {
         return steerMotor.getSelectedSensorPosition(0);
+    }
+
+    public void stop() {
+        driveMotor.set(ControlMode.PercentOutput, 0);
+        steerMotor.stopMotor();
     }
 
 }

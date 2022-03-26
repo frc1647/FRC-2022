@@ -10,6 +10,7 @@ import java.util.Collections;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -59,7 +60,7 @@ public class Swerve extends Subsystem {
     // ADJUST SWERVE MODULE SETTINGS HERE
     private void init() {
         initDriveMotor(frDrive, true);
-        initDriveMotor(flDrive, false);
+        initDriveMotor(flDrive, true);
         initDriveMotor(rrDrive, true);
         initDriveMotor(rlDrive, true);
 
@@ -68,6 +69,11 @@ public class Swerve extends Subsystem {
         initSteerMotor(flSteer, true, invertSensorPhase);
         initSteerMotor(rrSteer, true, invertSensorPhase);
         initSteerMotor(rlSteer, true, invertSensorPhase);
+        
+        //makes it move like an unpowered caster wheel
+        //flSteer.setNeutralMode(NeutralMode.Coast); // REMOVE LATER
+        //flDrive.setNeutralMode(NeutralMode.Coast); // REMOVE LATER
+        //flSteer.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.SoftwareEmulatedSensor, 0, 0);
     }
 
     private void initDriveMotor(BaseMotorController motor, boolean invert) {
@@ -89,7 +95,7 @@ public class Swerve extends Subsystem {
 
         //motor.config_IntegralZone(0, 100, 0);
         motor.configAllowableClosedloopError(0, 2, 0);
-        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
+        //motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 0);
     }
 
     public void SwerveDrive(double strafe, double forward, double omega) {
@@ -119,7 +125,7 @@ public class Swerve extends Subsystem {
         // When drives are calibrated for zero position on encoders they can be at 90 degrees (or maybe some other angle) to the front of the robot.
         // Subtract and add 90 degrees to steering calculation to offset for initial position/calibration of drives if the drive zero position faces the side of the robot.
         double frAngle = Math.toDegrees(Math.atan2(B, C)) - 0;//12.66;//76.99;
-        double flAngle = Math.toDegrees(Math.atan2(B, D)) - 39.38;//35.16;//2.46;
+        double flAngle = Math.toDegrees(Math.atan2(B, D)) - 0;//39.38;//35.16;//2.46;
         double rrAngle = Math.toDegrees(Math.atan2(A, C)) + 0;//152.93;
         double rlAngle = Math.toDegrees(Math.atan2(A, D)) + 0;//156.45;
         // ABOVE ANGLE OFFSETS ARE TEMPORARY
@@ -158,6 +164,13 @@ public class Swerve extends Subsystem {
 
     public SwerveModule getRearLeftModule() {
         return rearLeft;
+    }
+
+    public void stop() {
+        frontLeft.stop();
+        frontRight.stop();
+        rearLeft.stop();
+        rearRight.stop();
     }
 
     @Override

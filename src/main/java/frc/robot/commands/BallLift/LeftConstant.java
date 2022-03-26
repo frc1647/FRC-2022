@@ -16,7 +16,7 @@ public class LeftConstant extends Command {
   public LeftConstant(boolean down) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballLift);
-    invert = down ? -1:1;
+    invert = down ? 1:-1;
   }
 
   // Called just before this Command runs the first time
@@ -37,12 +37,15 @@ public class LeftConstant extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {}
+  protected void end() {
+    Robot.ballLift.stopLeftLift();
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
+  /*
   @Override
   protected void interrupted() {
-    end();
-  }
+    //end();
+  }*/
 }

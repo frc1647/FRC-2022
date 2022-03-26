@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     //m_autonomousCommand = m_chooser.getSelected();
-    //m_autonomousCommand = new Auto1();
+    m_autonomousCommand = new Auto2();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -132,6 +132,10 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     usbCam = CameraServer.startAutomaticCapture();
+    //SwerveDrive.getFrontRightModule().move3(0, 0);
+    //SwerveDrive.getFrontLeftModule().move3(0, 0);
+    //SwerveDrive.getRearLeftModule().move3(0, 0);
+    //SwerveDrive.getRearRightModule().move3(0, 0);
   }
 
   /** This function is called periodically during operator control. */
