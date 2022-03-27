@@ -74,8 +74,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("Drive Out", new Auto2());
+    m_chooser.addOption("Score & Drive Out", new Auto3());
     SmartDashboard.putData("Auto mode", m_chooser);
     //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
     //drivetrain.resetDriveEnc();
@@ -111,8 +111,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_chooser.getSelected();
-    m_autonomousCommand = new Auto2();
+    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = new Auto2();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }

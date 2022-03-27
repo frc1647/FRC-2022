@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.Movement.NewDrive;
+import frc.robot.commands.Movement.TankDrive;
 
 /** Add your docs here. */
 public class Swerve extends Subsystem {
@@ -27,7 +28,7 @@ public class Swerve extends Subsystem {
     private BaseMotorController flDrive = RobotMap.FLTalonD;
     private BaseMotorController rrDrive = RobotMap.RRTalonD;
     private BaseMotorController rlDrive = RobotMap.RLTalonD;
-    // BaseMotorController will be replaced with spark max because of integrated encoder on Neos
+    // BaseMotorController will be replaced with spark max because of integrated encoder on Neos //not anymore
 
     private WPI_TalonSRX frSteer = RobotMap.FRTalonS;
     private WPI_TalonSRX flSteer = RobotMap.FLTalonS;
@@ -36,13 +37,13 @@ public class Swerve extends Subsystem {
 
     private final double width = 22;
     private final double length = 21;
-    private final double maxSpeed = 120; // inches per second
-    private final double encoderTicsPerRotation = 1024;
+    //private final double maxSpeed = 120; // inches per second
+    private final double encoderTicsPerRotation = 1660;//1024;
 
     // ADJUST PIDS HERE
-    private final double P = 9.0;
-    private final double I = 0.0;
-    private final double D = 10.0;
+    private final double P = 6.9;//9.0;
+    private final double I = 0;//0.0;
+    private final double D = 0.03;//10.0;
 
     private SwerveModule frontRight;
     private SwerveModule frontLeft;
@@ -142,9 +143,17 @@ public class Swerve extends Subsystem {
         rearLeft.move3(rlSpeed, rlAngle);
     }
 
-    public double getMaxSpeed() {
-        return maxSpeed;
+    public void tankSwerve(double leftSpeed, double rightSpeed) {
+        final double angle = 0;
+        frontRight.move3(rightSpeed, angle);
+        frontLeft.move3(leftSpeed, angle);
+        rearRight.move3(rightSpeed, angle);
+        rearLeft.move3(leftSpeed, angle);
     }
+
+    /*public double getMaxSpeed() {
+        return maxSpeed;
+    }*/
 
     public double getEncoderTicsPerRotation() {
         return encoderTicsPerRotation;
@@ -176,7 +185,8 @@ public class Swerve extends Subsystem {
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new NewDrive());
+        //setDefaultCommand(new NewDrive());
+        setDefaultCommand(new TankDrive());
     }
 
 }
