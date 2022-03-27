@@ -72,8 +72,8 @@ public class OI {
     //intakeReverse.whileHeld(new SpinIntake(-1));
 
     //Controller pt2
-    JoystickButton cClimbUp = new JoystickButton(controller, 1);
-    JoystickButton cClimbDown = new JoystickButton(controller, 2);
+    JoystickButton cClimbUp = new JoystickButton(controller, 2);
+    JoystickButton cClimbDown = new JoystickButton(controller, 1);
     JoystickButton cBallUp = new JoystickButton(controller, 4);
     JoystickButton cBallDown = new JoystickButton(controller, 3);
     JoystickButton cStopMechanisims = new JoystickButton(controller, 6);
