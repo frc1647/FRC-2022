@@ -75,8 +75,6 @@ public class BallLift extends Subsystem {
   public void LiftMove(int leftHeight, int rightHeight) {
     getLeftMotor().set(ControlMode.Position, leftHeight);
     getRightMotor().set(ControlMode.Position, rightHeight);
-    SmartDashboard.putNumber("LeftLift height", getPositionLeft());
-    SmartDashboard.putNumber("RightLift height", getPositionRight());
   }
 
   public void leftConst(double speed) {
