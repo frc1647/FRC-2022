@@ -71,7 +71,25 @@ public class OI {
     stopMechanisims.whenPressed(new StopMechanisims());
     //intakeReverse.whileHeld(new SpinIntake(-1));
 
-    /*
+    //Controller pt2
+    JoystickButton cClimbUp = new JoystickButton(controller, 0);
+    JoystickButton cClimbDown = new JoystickButton(controller, 1);
+    JoystickButton cLeftballUpConstant = new JoystickButton(controller, 2);
+    JoystickButton cLeftballDownConstant = new JoystickButton(controller, 3);
+    JoystickButton cRightballUpConstant = new JoystickButton(controller, 4);
+    JoystickButton cRightballDownConstant = new JoystickButton(controller, 5);
+    JoystickButton cStopMechanisims = new JoystickButton(controller, 6);
+
+    cClimbUp.whenPressed(new ExtendClimber());
+    cClimbDown.whenPressed(new RetractClimber());
+    cLeftballUpConstant.whileHeld(new LeftConstant(false));
+    cLeftballDownConstant.whileHeld(new LeftConstant(true));
+    cRightballUpConstant.whileHeld(new RightConstant(false));
+    cRightballDownConstant.whileHeld(new RightConstant(true));
+    cStopMechanisims.whenPressed(new StopMechanisims());
+    
+    
+    /* Old Controller
     //Controller Controller Controller Controller Controller Controller
     JoystickButton cIntakeSpin = new JoystickButton(controller, 6);
     JoystickButton cIntakeReverse = new JoystickButton(controller, 5);
@@ -105,5 +123,8 @@ public class OI {
     return tablet;
   
   }*/
-  
+
+  public XboxController getController() {
+    return controller;
+  }  
 }
