@@ -36,13 +36,13 @@ public class Swerve extends Subsystem {
 
     private final double width = 22;
     private final double length = 21;
-    private final double maxSpeed = 120; // inches per second
-    private final double encoderTicsPerRotation = 1024;
+    //private final double maxSpeed = 120; // inches per second
+    private final double encoderTicsPerRotation = 1660;//1024;
 
     // ADJUST PIDS HERE
-    private final double P = 9.0;
+    private final double P = 5.0;//6.9;//9.0;
     private final double I = 0.0;
-    private final double D = 10.0;
+    private final double D = 0.03;//10.0;
 
     private SwerveModule frontRight;
     private SwerveModule frontLeft;
@@ -64,7 +64,7 @@ public class Swerve extends Subsystem {
         initDriveMotor(rrDrive, true);
         initDriveMotor(rlDrive, true);
 
-        boolean invertSensorPhase = true;
+        boolean invertSensorPhase = false;
         initSteerMotor(frSteer, true, invertSensorPhase);
         initSteerMotor(flSteer, true, invertSensorPhase);
         initSteerMotor(rrSteer, true, invertSensorPhase);
@@ -84,7 +84,8 @@ public class Swerve extends Subsystem {
 
     private void initSteerMotor(WPI_TalonSRX motor, boolean invertDrive, boolean invertEncoder) {
         motor.configFactoryDefault();
-        motor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
+        //motor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
+        motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         motor.setSensorPhase(invertEncoder);
         motor.setInverted(invertDrive);
         motor.setNeutralMode(NeutralMode.Brake);
@@ -142,9 +143,9 @@ public class Swerve extends Subsystem {
         rearLeft.move3(rlSpeed, rlAngle);
     }
 
-    public double getMaxSpeed() {
+    /*public double getMaxSpeed() {
         return maxSpeed;
-    }
+    }*/
 
     public double getEncoderTicsPerRotation() {
         return encoderTicsPerRotation;

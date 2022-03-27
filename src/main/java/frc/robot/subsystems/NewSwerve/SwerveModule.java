@@ -74,15 +74,15 @@ public class SwerveModule {
         double currentPos = steerMotor.getSelectedSensorPosition(0);
         
         double convPos = currentPos % encoderTics;
-        if (Math.abs(convPos) > 512) { //will produce both 512 and -512 as a value, might need to fix
-            convPos -= 1024 * Math.signum(convPos);
+        if (Math.abs(convPos) > encoderTics / 2) { //will produce both 512 and -512 as a value, might need to fix
+            convPos -= encoderTics * Math.signum(convPos);
         }
 
         double deltaTics = (convPos - convAngle) * -1;
-        /*if (Math.abs(deltaTics) > 256.0) {
-            deltaTics -= 512.0 * Math.signum(deltaTics);
+        if (Math.abs(deltaTics) > encoderTics / 4) {
+            deltaTics -= (encoderTics / 2) * Math.signum(deltaTics);
             speed = -speed;
-        }*/
+        }
         targetPos = deltaTics + currentPos;
 
         setAngle(targetPos);
