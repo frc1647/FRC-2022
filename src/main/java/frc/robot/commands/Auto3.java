@@ -16,8 +16,8 @@ public class Auto3 extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    
-    addSequential(new BallLiftUp());
+
+    addSequential(new BallLiftUp(), 5.0);
     addSequential(new DriveTime(2.0, 0.5));
     //addSequential(new BallLiftDown());
 
