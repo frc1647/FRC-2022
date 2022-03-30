@@ -14,7 +14,6 @@ public class DriveDistance extends InstantCommand {
   //following two values are temporary
   private final double maxRobotSpeed = 120; //inches per second
   private double motorSpeed = 0.5;
-  private int invert;
 
   private double distance; //inches
   private double velocity; //inches per second
@@ -30,10 +29,8 @@ public class DriveDistance extends InstantCommand {
   public DriveDistance(double inches, boolean invert) {
     super();
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
+    requires(Robot.SwerveDrive);
     this.distance = Math.abs(inches);
-    
-    this.invert = invert ? -1:1;
     
     /*if (invert) {
       this.invert = -1;
@@ -42,25 +39,13 @@ public class DriveDistance extends InstantCommand {
     }*/
   }
 
-  /** Makes the robot drive a specified distance.
-   * 
-   * param inches The distance the robot should drive forward in inches.
-   *
-  public DriveDistance(double inches) {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
-    this.distance = Math.abs(inches);
-    this.invert = 1;
-  }*/
-
   // Called once when the command executes
   @Override
   protected void initialize() {
     velocity = maxRobotSpeed * motorSpeed;
     time = distance/velocity;
     
-    driveTime = new DriveTime(time, motorSpeed * invert);
+    driveTime = new DriveTime(time, motorSpeed, 0, 0);
     driveTime.start();
   }
 }

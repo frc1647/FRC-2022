@@ -14,7 +14,7 @@ public class Auto2 extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new DriveTime(1.0, 0.5));
+    addSequential(new DriveTime(1.0, 0.5, 0, 0));
 
     // To run multiple commands at the same time,
     // use addParallel()
