@@ -21,7 +21,7 @@ import frc.robot.RobotMap;
 
 public class ClimberSubsystem extends Subsystem{
 
-    //private WPI_TalonFX leftClimber;
+    private WPI_TalonFX leftClimber;
     private WPI_TalonFX rightClimber;
 
     private double extendPosition;
@@ -35,23 +35,17 @@ public class ClimberSubsystem extends Subsystem{
     public ClimberSubsystem() {
         
         rightClimber = RobotMap.rightClimber;
-        rightClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
-        rightClimber.setSensorPhase(false);
-        rightClimber.setNeutralMode(NeutralMode.Brake);
-
-        //leftClimber = RobotMap.leftClimber;
-        //leftClimber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
-        //leftClimber.setSensorPhase(true);
-        //leftClimber.setNeutralMode(NeutralMode.Brake);
-        
-        //initMotor(leftClimber);
+        rightClimber.configFactoryDefault();
+        leftClimber = RobotMap.leftClimber;
+        leftClimber.configFactoryDefault();
+        initMotor(leftClimber);
         initMotor(rightClimber);
 
         //rightClimber.follow(leftClimber);
         //rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
-        extendPosition = -344500;
-        retractPosition = -150000;
+        extendPosition = 0;//-344500;
+        retractPosition = 0;//-150000;
     }
 
     public void initMotor(WPI_TalonFX motor) {
@@ -63,8 +57,7 @@ public class ClimberSubsystem extends Subsystem{
         //motor.configNominalOutputForward(0, 0);
         //motor.configNominalOutputReverse(0, 0);
         motor.setNeutralMode(NeutralMode.Brake);
-        motor.configAllowableClosedloopError(0, 10, 0);
-        motor.configMaxIntegralAccumulator(0, 100);
+        motor.configAllowableClosedloopError(0, 4, 0);
         // NEED TO TUNE THESE
         motor.config_kP(0, 1.5, 0);
         motor.config_kI(0, 0.0, 0);
@@ -73,24 +66,24 @@ public class ClimberSubsystem extends Subsystem{
     
     public void stopClimber() {
 
-        //leftClimber.set(ControlMode.PercentOutput, 0);
+        leftClimber.set(ControlMode.PercentOutput, 0);
         rightClimber.set(ControlMode.PercentOutput, 0);
 
     }
     
-    public void extendClimber(double percentOutput) {
+    public void moveClimber(double percentOutput) {
 
-        //leftClimber.set(ControlMode.PercentOutput, 0.5);
-        rightClimber.set(ControlMode.PercentOutput, percentOutput);
-
-    }
-
-    public void retractClimber(double percentOutput) {
-
-        //leftClimber.set(ControlMode.PercentOutput, -0.25);
-        rightClimber.set(ControlMode.PercentOutput, percentOutput);
+        leftClimber.set(ControlMode.PercentOutput, percentOutput);
+        rightClimber.set(ControlMode.PercentOutput, percentOutput * -1);
 
     }
+
+    /*public void retractClimber(double percentOutput) {
+
+        leftClimber.set(ControlMode.PercentOutput, percentOutput * -1);
+        rightClimber.set(ControlMode.PercentOutput, percentOutput);
+
+    }*/
     
     /** Moves the climber to a set postion.
      * 
@@ -100,20 +93,18 @@ public class ClimberSubsystem extends Subsystem{
         //double input = SmartDashboard.getNumber("input", 0);
         //SmartDashboard.putNumber("output", input);
 
-        //rightClimber.config_kP(2, SmartDashboard.getNumber("climb kP", 0), 0);
-        //rightClimber.config_kI(2, SmartDashboard.getNumber("climb kI", 0), 0);
-        //rightClimber.config_kD(2, SmartDashboard.getNumber("climb kD", 0), 0);
-
-        double setPosition = retract ? retractPosition:extendPosition;
+        //leftClimber.set(ControlMode.Position, extendPosition);
+        double setPosition = retract ? extendPosition:retractPosition;
         rightClimber.set(ControlMode.Position, (int)setPosition);
 
-        SmartDashboard.putNumber("Climber height", rightClimber.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("right Climber height", rightClimber.getSelectedSensorPosition());
+        SmartDashboard.putNumber("left Climber height", leftClimber.getSelectedSensorPosition());
         SmartDashboard.putNumber("Target height", setPosition);
     }
 
     public void resetClimber() {
 
-        //leftClimber.set(ControlMode.Position, 0);
+        leftClimber.set(ControlMode.Position, 0);
         rightClimber.set(ControlMode.Position, 0);
 
     }

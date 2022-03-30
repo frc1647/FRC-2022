@@ -20,7 +20,7 @@ public class DriveTime extends TimedCommand {
   public DriveTime(double timeout, double multiplier) {
     super(timeout);
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
+    requires(Robot.SwerveDrive);
     this.motorSpeed = multiplier;
   }
 
@@ -31,13 +31,13 @@ public class DriveTime extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.move(motorSpeed, 0, 0);
+    Robot.SwerveDrive.SwerveDrive(0, motorSpeed, 0);
   }
 
   // Called once after timeout
   @Override
   protected void end() {
-    Robot.drivetrain.stop();
+    Robot.SwerveDrive.stop();
   }
 
   // Called when another command which requires one or more of the same

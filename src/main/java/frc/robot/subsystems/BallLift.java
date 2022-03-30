@@ -60,31 +60,43 @@ public class BallLift extends Subsystem {
   public void initMotor(WPI_TalonFX motor) {
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     motor.setSensorPhase(false);
-    //motor.configPeakOutputForward(1, 0);
-    //motor.configPeakOutputReverse(-1, 0);
+    motor.configPeakOutputForward(0.4, 0);
+    motor.configPeakOutputReverse(-0.4, 0);
     //motor.configNominalOutputForward(0, 0);
     //motor.configNominalOutputReverse(0, 0);
     motor.setNeutralMode(NeutralMode.Brake);
-    motor.configAllowableClosedloopError(1, 4, 10);
+    motor.configAllowableClosedloopError(0, 4, 0);
 
-    motor.config_kP(0, SmartDashboard.getNumber("ball kP", 0), 0);
-    motor.config_kI(0, SmartDashboard.getNumber("ball kI", 0), 0);
-    motor.config_kD(0, SmartDashboard.getNumber("ball kD", 0), 0);
+    motor.config_kP(0, 0.5, 0);
+    motor.config_kI(0, 0.0, 0);
+    motor.config_kD(0, 0.0, 0);
   }
 
   public void LiftMove(int leftHeight, int rightHeight) {
     getLeftMotor().set(ControlMode.Position, leftHeight);
     getRightMotor().set(ControlMode.Position, rightHeight);
-    SmartDashboard.putNumber("LeftLift height", getPositionLeft());
-    SmartDashboard.putNumber("RightLift height", getPositionRight());
-
   }
 
-  public void stopMotors(WPI_TalonFX motor) {
+  public void leftConst(double speed) {
+    getLeftMotor().set(ControlMode.PercentOutput, speed);
+  }
+
+  public void rightConst(double speed) {
+    getRightMotor().set(ControlMode.PercentOutput, speed);
+  }
+
+  public void stopMotors() {
     getLeftMotor().set(ControlMode.PercentOutput, 0);
     getRightMotor().set(ControlMode.PercentOutput, 0);
   }
 
+  public void stopLeftLift() {
+    getLeftMotor().stopMotor();
+  }
+
+  public void stopRightLift() {
+    getRightMotor().stopMotor();
+  }
   
   public double getPositionLeft(){
     return BallmotorLeft.getSelectedSensorPosition(0);

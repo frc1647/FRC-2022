@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -12,13 +12,11 @@ public class RetractClimberConstant extends Command {
     }
 
     @Override
-    protected void initialize() {
-
-    }
+    protected void initialize() {}
 
     @Override
     protected void execute() {
-        Robot.ClimberSubsystem.retractClimber(-0.25);
+        Robot.ClimberSubsystem.moveClimber(-0.25);
     }
 
     @Override
@@ -33,7 +31,7 @@ public class RetractClimberConstant extends Command {
 
     @Override
     protected void interrupted() {
-      end();
+        end();
     }
     
 }

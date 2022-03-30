@@ -1,24 +1,22 @@
-package frc.robot.commands;
+package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ExtendClimberConstant extends Command {
+public class ExtendClimber extends Command {
 
     /**Extends the climber to a height specified in {@link ClimberSubsystem} */
-    public ExtendClimberConstant() {
+    public ExtendClimber() {
         requires(Robot.ClimberSubsystem);
     }
 
     @Override
-    protected void initialize() {
-
-    }
+    protected void initialize() {}
 
     @Override
     protected void execute() {
-        Robot.ClimberSubsystem.extendClimber(0.25);
+        Robot.ClimberSubsystem.ClimberAutoStop(false);
     }
 
     @Override
@@ -29,11 +27,6 @@ public class ExtendClimberConstant extends Command {
     @Override
     protected boolean isFinished() {
         return false;
-    }
-
-    @Override
-    protected void interrupted() {
-      end();
     }
     
 }

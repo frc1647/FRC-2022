@@ -23,13 +23,15 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 //import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Swerve.Swerve;
-import frc.robot.subsystems.Swerve.SwerveDrivetrain;
-import frc.robot.subsystems.Swerve.SwerveMath;
-import frc.robot.subsystems.Swerve.*;
+//import frc.robot.subsystems.Swerve.Swerve;
+//import frc.robot.subsystems.Swerve.SwerveDrivetrain;
+//import frc.robot.subsystems.Swerve.SwerveMath;
+//import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.BallLift;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.NewSwerve.Swerve;
 import frc.robot.OI;
+import frc.robot.RobotMap;
 
 import frc.robot.commands.*;
 import frc.robot.commands.Movement.*;
@@ -42,17 +44,15 @@ import frc.robot.commands.Movement.*;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static SwerveDrivetrain drivetrain = new SwerveDrivetrain();
-  public static SwerveDirective directive = new SwerveDirective();
-  public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
-  public static SwapCentricMode swapCentricMode = new SwapCentricMode();
-  public static SwerveUtil swerveUtil = new SwerveUtil();
   public static String mode;
+  public static Swerve SwerveDrive = new Swerve();
   //public static Timer m_timer = new Timer();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static UsbCamera usbCam;
+
+  //public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
   
   public static OI oi;
   Command m_autonomousCommand;
@@ -64,6 +64,9 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   */
 
+  public static double zeroHeading;
+  public static double zeroAngle;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -71,11 +74,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("taxi", new Auto2());
+    m_chooser.addOption("score & taxi", new Auto3());
     SmartDashboard.putData("Auto mode", m_chooser);
     //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
     //drivetrain.resetDriveEnc();
+    zeroHeading = RobotMap.navx.getFusedHeading();
+    zeroAngle = RobotMap.navx.getAngle();
   }
 
   /**
@@ -87,7 +92,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    
+    //update smartdashboard values from NewSwerve here
+    SmartDashboard.putNumber("front left pos", SwerveDrive.getFrontLeftModule().getCurrentPos());
+    SmartDashboard.putNumber("front right pos", SwerveDrive.getFrontRightModule().getCurrentPos());
+    SmartDashboard.putNumber("rear left pos", SwerveDrive.getRearLeftModule().getCurrentPos());
+    SmartDashboard.putNumber("rear right pos", SwerveDrive.getRearRightModule().getCurrentPos());
+    SmartDashboard.putNumber("LeftLift height", ballLift.getPositionLeft());
+    SmartDashboard.putNumber("RightLift height", ballLift.getPositionRight());
   }
 
   /**
@@ -102,8 +113,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_chooser.getSelected();
-    //m_autonomousCommand = new Auto1();
+    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = new Auto2();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -123,6 +134,10 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     usbCam = CameraServer.startAutomaticCapture();
+    //SwerveDrive.getFrontRightModule().move3(0, 0);
+    //SwerveDrive.getFrontLeftModule().move3(0, 0);
+    //SwerveDrive.getRearLeftModule().move3(0, 0);
+    //SwerveDrive.getRearRightModule().move3(0, 0);
   }
 
   /** This function is called periodically during operator control. */
