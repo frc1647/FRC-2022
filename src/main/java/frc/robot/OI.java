@@ -31,6 +31,7 @@ public class OI {
   Joystick leftJoy = RobotMap.leftJoy;
   Joystick rightJoy = RobotMap.rightJoy;
   XboxController controller = RobotMap.controller;
+
   //Joystick tablet = RobotMap.tablet;
 
   public OI(){
@@ -44,6 +45,8 @@ public class OI {
     //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
+    //ballsUp.whenPressed(new BallLiftUpSwitch());
+
     ballsDown.whenPressed(new BallLiftDown());
     climbUpConstant.whileHeld(new ExtendClimberConstant());
     climbDownConstant.whileHeld(new RetractClimberConstant());

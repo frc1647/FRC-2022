@@ -2,22 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.BallLift;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Movement.DriveDistance;
-import frc.robot.commands.Movement.DriveTime;
+import frc.robot.Robot;
 
-public class Auto2 extends CommandGroup {
+public class BallLiftUpSwitch extends CommandGroup {
+  
+  private Command left;
+  private Command right;
+  
   /** Add your docs here. */
-  public Auto2() {
+  public BallLiftUpSwitch() {
+    requires(Robot.ballLift);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-
-    //addSequential(new DriveTime(1, 1.0, 0, 0));
-    addSequential(new DriveDistance(24, 0.1));
 
     // To run multiple commands at the same time,
     // use addParallel()
@@ -30,5 +32,21 @@ public class Auto2 extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
+    left = new LeftBallLiftUp(0.5);
+    right = new RightBallLiftUp(0.5);
+
+    addParallel(left);
+    addSequential(right);
+  }
+
+  @Override
+  protected void interrupted() {
+    end();
+  }
+
+  @Override
+  protected void end() {
+    left.cancel();
+    right.cancel();
   }
 }
