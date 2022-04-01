@@ -65,8 +65,8 @@ public class OI {
     JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
     //JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
-    climbUp.whenPressed(new ExtendClimber());
-    climbDown.whenPressed(new RetractClimber());
+    climbUp.whenPressed(new ExtendClimberConstant());
+    climbDown.whenPressed(new RetractClimberConstant());
     leftballUpConstant.whileHeld(new LeftConstant(false));
     leftballDownConstant.whileHeld(new LeftConstant(true));
     rightballUpConstant.whileHeld(new RightConstant(false));
