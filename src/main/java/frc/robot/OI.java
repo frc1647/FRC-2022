@@ -96,29 +96,6 @@ public class OI {
     cLeftballDownConstant.whileHeld(new LeftConstant(true));
     cRightballUpConstant.whileHeld(new RightConstant(false));
     cRightballDownConstant.whileHeld(new RightConstant(true));
-    
-    /* Old Controller
-    //Controller Controller Controller Controller Controller Controller
-    JoystickButton cIntakeSpin = new JoystickButton(controller, 6);
-    JoystickButton cIntakeReverse = new JoystickButton(controller, 5);
-    JoystickButton cLiftBall = new JoystickButton(controller, 4);
-    JoystickButton cLowerBall = new JoystickButton(controller, 1);
-    //JoystickButton cClimbUp = new JoystickButton(controller, 3);
-    //JoystickButton cClimbDown = new JoystickButton(controller, 2);
-    JoystickButton climberConstantUp = new JoystickButton(controller, 3);
-    JoystickButton climberConstantDown = new JoystickButton(controller, 2);
-    
-    //cIntakeSpin.whileHeld(new SpinIntake(1));
-    //cIntakeReverse.whileHeld(new SpinIntake(-1));
-    cLiftBall.whenPressed(new BallLiftUp());
-    climberConstantUp.whenPressed(new ExtendClimberConstant());
-    cLowerBall.whenPressed(new BallLiftDown());
-    climberConstantDown.whenPressed(new RetractClimberConstant());
-    //cClimbUp.whenPressed(new ExtendClimber());
-    //cClimbDown.whenPressed(new RetractClimber());
-    //climberConstantUp.whenPressed(new ExtendClimberConstant());
-    //climberConstantDown.whenPressed(new RetractClimberConstant());
-    */
   }
 
   public Joystick getLeftJoy(){
@@ -128,10 +105,6 @@ public class OI {
   public Joystick getRightJoy() {
     return rightJoy;
   }
-  /*public Joystick getTablet(){
-    return tablet;
-  
-  }*/
 
   public XboxController getController() {
     return controller;
