@@ -39,20 +39,26 @@ public class DriveDistance extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
+    double xDistAbs = Math.abs(xDist);
+    double yDistAbs = Math.abs(yDist);
     velocity = maxRobotSpeed * motorSpeed;
-    time = Math.abs(Math.hypot(xDist, yDist)) / velocity;
+    time = Math.hypot(xDistAbs, yDistAbs) / velocity;
 
     double ratio;
-    if (Math.abs(yDist) < Math.abs(xDist)) {
+    if (xDistAbs > yDistAbs) {
 
-      ratio = (yDist / Math.abs(xDist));
-      driveTime = new DriveTime(time, xDist * motorSpeed, ratio * motorSpeed, 0);
+      ratio = (yDist / xDistAbs);
+      driveTime = new DriveTime(time, motorSpeed, ratio * motorSpeed, 0);
 
-    } else if (Math.abs(yDist) > Math.abs(xDist)) {
+    } else if (yDistAbs > xDistAbs) {
+
+      ratio = xDist / yDistAbs;
+      driveTime = new DriveTime(time, ratio * motorSpeed, motorSpeed, 0);
+
+    } else {
+
+      driveTime = new DriveTime(time, motorSpeed, motorSpeed, 0);
       
-      ratio = xDist / Math.abs(yDist);
-      driveTime = new DriveTime(time, ratio * motorSpeed, yDist * motorSpeed, 0);
-
     }
     driveTime.start();
   }

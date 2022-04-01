@@ -45,7 +45,7 @@ public class OI {
     //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
-    //ballsUp.whenPressed(new BallLiftUpSwitch());
+    //ballsUp.whenPressed(new BallLiftUpSwitch(0.5));
 
     ballsDown.whenPressed(new BallLiftDown());
     climbUpConstant.whileHeld(new ExtendClimberConstant());
