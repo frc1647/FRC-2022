@@ -11,7 +11,6 @@ import frc.robot.Robot;
 /** Add your docs here. */
 public class DriveDistance extends InstantCommand {
   
-  //following two values are temporary
   private final double maxRobotSpeed = 85; //inches per second
   private double motorSpeed = 0.5;
 
@@ -19,6 +18,7 @@ public class DriveDistance extends InstantCommand {
   private double yDist;
   private double velocity; //inches per second
   private double time; //seconds
+  private final double spinCorr = 0.235;//constant to account for the time spent rotating swerve modules
   private Command driveTime;
   
   
@@ -48,16 +48,19 @@ public class DriveDistance extends InstantCommand {
     if (xDistAbs > yDistAbs) {
 
       ratio = (yDist / xDistAbs);
-      driveTime = new DriveTime(time, motorSpeed, ratio * motorSpeed, 0);
+      time += (ratio / 2) * spinCorr;
+      driveTime = new DriveTime(time, motorSpeed * Math.signum(xDist), ratio * motorSpeed, 0);
 
     } else if (yDistAbs > xDistAbs) {
 
       ratio = xDist / yDistAbs;
-      driveTime = new DriveTime(time, ratio * motorSpeed, motorSpeed, 0);
+      time += (1 - (ratio / 2)) * spinCorr;
+      driveTime = new DriveTime(time, ratio * motorSpeed, motorSpeed * Math.signum(yDist), 0);
 
     } else {
 
-      driveTime = new DriveTime(time, motorSpeed, motorSpeed, 0);
+      time += 0.5 * spinCorr;
+      driveTime = new DriveTime(time, motorSpeed * Math.signum(xDist), motorSpeed * Math.signum(yDist), 0);
       
     }
     driveTime.start();

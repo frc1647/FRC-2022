@@ -10,11 +10,11 @@ public class SpinIntake extends Command {
 
     /** Spins the intake.
      * 
-     * @param reverse If -1, the intake spins in reverse. If 1, the intake spins normally.
+     * @param reverse If true, the intake spins in reverse. If false, the intake spins normally.
      */
-    public SpinIntake(int reverse) {
+    public SpinIntake(boolean reverse) {
         requires(Robot.IntakeSubsystem);
-        invert = reverse;
+        invert = reverse ? -1:1;
     }
 
     @Override

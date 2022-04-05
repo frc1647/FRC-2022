@@ -44,8 +44,8 @@ public class ClimberSubsystem extends Subsystem{
         //rightClimber.follow(leftClimber);
         //rightClimber.setInverted(TalonFXInvertType.FollowMaster);
 
-        extendPosition = 0;//-344500;
-        retractPosition = 0;//-150000;
+        extendPosition = -170000;
+        retractPosition = -62000;
     }
 
     public void initMotor(WPI_TalonFX motor) {
@@ -57,11 +57,11 @@ public class ClimberSubsystem extends Subsystem{
         //motor.configNominalOutputForward(0, 0);
         //motor.configNominalOutputReverse(0, 0);
         motor.setNeutralMode(NeutralMode.Brake);
-        motor.configAllowableClosedloopError(0, 4, 0);
+        motor.configAllowableClosedloopError(0, 2, 0);
         // NEED TO TUNE THESE
-        motor.config_kP(0, 1.5, 0);
+        motor.config_kP(0, 0.9, 0);
         motor.config_kI(0, 0.0, 0);
-        motor.config_kD(0, 1.0, 0);
+        motor.config_kD(0, 1.5, 0);
     }
     
     public void stopClimber() {
@@ -94,8 +94,9 @@ public class ClimberSubsystem extends Subsystem{
         //SmartDashboard.putNumber("output", input);
 
         //leftClimber.set(ControlMode.Position, extendPosition);
-        double setPosition = retract ? extendPosition:retractPosition;
+        double setPosition = retract ? retractPosition:extendPosition;
         rightClimber.set(ControlMode.Position, (int)setPosition);
+        leftClimber.set(ControlMode.Position, (int)setPosition);
 
         SmartDashboard.putNumber("right Climber height", rightClimber.getSelectedSensorPosition());
         SmartDashboard.putNumber("left Climber height", leftClimber.getSelectedSensorPosition());
@@ -107,5 +108,13 @@ public class ClimberSubsystem extends Subsystem{
         leftClimber.set(ControlMode.Position, 0);
         rightClimber.set(ControlMode.Position, 0);
 
+    }
+
+    public double getLeftHeight() {
+        return leftClimber.getSelectedSensorPosition();
+    }
+
+    public double getRightHeight() {
+        return rightClimber.getSelectedSensorPosition();
     }
 }

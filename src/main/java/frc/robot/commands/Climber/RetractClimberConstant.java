@@ -16,7 +16,7 @@ public class RetractClimberConstant extends Command {
 
     @Override
     protected void execute() {
-        Robot.ClimberSubsystem.moveClimber(-0.25);
+        Robot.ClimberSubsystem.moveClimber(-0.35);
     }
 
     @Override

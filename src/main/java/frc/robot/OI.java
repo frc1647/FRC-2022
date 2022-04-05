@@ -41,18 +41,14 @@ public class OI {
     JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
     JoystickButton climbUpConstant = new JoystickButton(rightJoy, 11);
     JoystickButton climbDownConstant = new JoystickButton(rightJoy, 10);
-    //JoystickButton intakeUp = new JoystickButton(rightJoy, 4);
-    //JoystickButton intakeDown = new JoystickButton(rightJoy, 5);
 
     ballsUp.whenPressed(new BallLiftUp());
-    //ballsUp.whenPressed(new BallLiftUpSwitch(0.5));
+    //ballsUp.whenPressed(new BallLiftUpSwitch(0.2));
 
     ballsDown.whenPressed(new BallLiftDown());
     climbUpConstant.whileHeld(new ExtendClimberConstant());
     climbDownConstant.whileHeld(new RetractClimberConstant());
-    //intakeSpin.whileHeld(new SpinIntake(1));
-    //intakeUp.whenPressed(new RetractIntake());
-    //intakeDown.whenPressed(new ExtendIntake());
+    intakeSpin.whileHeld(new SpinIntake(false));
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
 
@@ -63,7 +59,7 @@ public class OI {
     JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
     JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
     JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
-    //JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
+    JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
 
     climbUp.whenPressed(new ExtendClimberConstant());
     climbDown.whenPressed(new RetractClimberConstant());
@@ -72,7 +68,7 @@ public class OI {
     rightballUpConstant.whileHeld(new RightConstant(false));
     rightballDownConstant.whileHeld(new RightConstant(true));
     stopMechanisims.whenPressed(new StopMechanisims());
-    //intakeReverse.whileHeld(new SpinIntake(-1));
+    intakeReverse.whileHeld(new SpinIntake(true));
 
     //Controller pt2
     JoystickButton cClimbUp = new JoystickButton(controller, 2);
@@ -86,9 +82,12 @@ public class OI {
     JoystickButton cRightballUpConstant = new JoystickButton(controller, 8);
     JoystickButton cRightballDownConstant = new JoystickButton(controller, 10);
 
-    cClimbUp.whileHeld(new ExtendClimberConstant());
-    cClimbDown.whileHeld(new RetractClimberConstant());
+    //cClimbUp.whileHeld(new ExtendClimberConstant());
+    //cClimbDown.whileHeld(new RetractClimberConstant());
+    cClimbUp.whenPressed(new ExtendClimber());
+    cClimbDown.whenPressed(new RetractClimber());
     cBallUp.whenPressed(new BallLiftUp());
+    //cBallUp.whenPressed(new BallLiftUpSwitch(0.2));
     cBallDown.whenPressed(new BallLiftDown());
     cStopMechanisims.whenPressed(new StopMechanisims());
 

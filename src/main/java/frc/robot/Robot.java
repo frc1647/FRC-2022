@@ -99,6 +99,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("rear right pos", SwerveDrive.getRearRightModule().getCurrentPos());
     SmartDashboard.putNumber("LeftLift height", ballLift.getPositionLeft());
     SmartDashboard.putNumber("RightLift height", ballLift.getPositionRight());
+    SmartDashboard.putNumber("left climber", ClimberSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("right climber", ClimberSubsystem.getRightHeight());
     SmartDashboard.putBoolean("right box switch", RobotMap.rightBoxSwitch.get());
     SmartDashboard.putBoolean("left box switch", RobotMap.leftBoxSwitch.get());
   }

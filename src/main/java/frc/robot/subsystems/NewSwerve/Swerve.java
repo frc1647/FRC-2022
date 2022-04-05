@@ -34,8 +34,8 @@ public class Swerve extends Subsystem {
     private WPI_TalonSRX rrSteer = RobotMap.RRTalonS;
     private WPI_TalonSRX rlSteer = RobotMap.RLTalonS;
 
-    private final double width = 22;
-    private final double length = 21;
+    private final double width = 22.25;
+    private final double length = 21.0;
     //private final double maxSpeed = 120; // inches per second
     private final double encoderTicsPerRotation = 1660;//1024;
 
