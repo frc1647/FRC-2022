@@ -56,8 +56,8 @@ public class RobotMap {
   //public static Encoder leftClimberEncoder = new Encoder(0, 1);
   //public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-  public static DigitalInput leftBoxSwitch = new DigitalInput(1);
-  public static DigitalInput rightBoxSwitch = new DigitalInput(0);
+  public static DigitalInput leftBoxSwitch = new DigitalInput(0);
+  public static DigitalInput rightBoxSwitch = new DigitalInput(1);
 
   // Climber
   public static WPI_TalonFX leftClimber = new WPI_TalonFX(13); //Falcon 500
