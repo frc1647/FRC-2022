@@ -12,9 +12,10 @@ public class BallLiftUpSwitch extends CommandGroup {
   
   private Command left;
   private Command right;
+  private final double boxSpeed = 0.6;
   
   /** Add your docs here. */
-  public BallLiftUpSwitch(double speed) {
+  public BallLiftUpSwitch() {
     requires(Robot.ballLift);
     // Add Commands here:
     // e.g. addSequential(new Command1());
@@ -32,6 +33,16 @@ public class BallLiftUpSwitch extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
+    left = new LeftBallLiftUp(boxSpeed);
+    right = new RightBallLiftUp(boxSpeed);
+
+    addParallel(left);
+    addSequential(right);
+  }
+
+  public BallLiftUpSwitch(double speed) {
+    requires(Robot.ballLift);
+
     left = new LeftBallLiftUp(speed);
     right = new RightBallLiftUp(speed);
 

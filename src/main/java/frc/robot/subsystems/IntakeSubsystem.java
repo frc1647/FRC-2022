@@ -30,7 +30,7 @@ public class IntakeSubsystem extends Subsystem {
 
     public void spinIntake(int invert) {
 
-        intakeSpin.set(ControlMode.PercentOutput, -0.5 * invert);
+        intakeSpin.set(ControlMode.PercentOutput, 0.80 * invert);
 
     }
 

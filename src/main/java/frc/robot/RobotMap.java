@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -55,8 +56,8 @@ public class RobotMap {
   //public static Encoder leftClimberEncoder = new Encoder(0, 1);
   //public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-  public static DigitalInput leftBoxSwitch = new DigitalInput(0);
-  public static DigitalInput rightBoxSwitch = new DigitalInput(1);
+  public static DigitalInput leftBoxSwitch = new DigitalInput(1);
+  public static DigitalInput rightBoxSwitch = new DigitalInput(0);
 
   // Climber
   public static WPI_TalonFX leftClimber = new WPI_TalonFX(13); //Falcon 500
@@ -64,5 +65,5 @@ public class RobotMap {
 
   // Intake
   //public static WPI_TalonFX intakePosition = new WPI_TalonFX(11);
-  public static WPI_TalonSRX intakeSpin = new WPI_TalonSRX(15);
+  public static WPI_VictorSPX intakeSpin = new WPI_VictorSPX(18);
 }

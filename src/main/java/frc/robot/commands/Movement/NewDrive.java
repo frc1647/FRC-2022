@@ -57,13 +57,18 @@ public class NewDrive extends Command {
       rcw = 0.0;
     }
 
+    if (Robot.oi.getRightJoy().getRawButton(4)) {
+      str *= -1;
+      fwd *= -1;
+    }
+
     //makes joysticcs values a parabola, while maintaining negative values
     fwd = Math.abs(Math.pow(fwd, strfwdPow)) * Math.signum(fwd);
     str = Math.abs(Math.pow(str, strfwdPow)) * Math.signum(str);
     rcw = Math.abs(Math.pow(rcw, rcwPow)) * Math.signum(rcw) * rcwScale;
 
-    /* //commented out until we get a working navx
-    if (!Robot.oi.getLeftJoy().getTrigger()) {
+    //commented out until we get a working navx
+    if (!Robot.oi.getLeftJoy().getTrigger()) { //should have a ! (it doesn't because not sure if work)
       // When the Left Joystick trigger is not pressed, The robot is in Field Centric Mode.
       // The calculations correct the forward and strafe values for field centric attitude. 
     
@@ -73,7 +78,7 @@ public class NewDrive extends Command {
       double temp = fwd * Math.cos(originCorrection) - str * Math.sin(originCorrection);
       str = str * Math.cos(originCorrection) + fwd * Math.sin(originCorrection);
       fwd = temp;
-    }*/
+    }
 
     Robot.SwerveDrive.SwerveDrive(str, fwd, rcw);
 

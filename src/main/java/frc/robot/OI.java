@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.*;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.StopMechanisims;
 import frc.robot.commands.BallLift.*;
 import frc.robot.commands.Climber.ExtendClimber;
@@ -42,8 +43,8 @@ public class OI {
     JoystickButton climbUpConstant = new JoystickButton(rightJoy, 11);
     JoystickButton climbDownConstant = new JoystickButton(rightJoy, 10);
 
-    ballsUp.whenPressed(new BallLiftUp());
-    //ballsUp.whenPressed(new BallLiftUpSwitch(0.2));
+    //ballsUp.whenPressed(new BallLiftUp());
+    ballsUp.whenPressed(new BallLiftUpSwitch());
 
     ballsDown.whenPressed(new BallLiftDown());
     climbUpConstant.whileHeld(new ExtendClimberConstant());
@@ -58,8 +59,8 @@ public class OI {
     JoystickButton leftballDownConstant = new JoystickButton(leftJoy, 7);
     JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
     JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
-    JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
-    JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
+    JoystickButton stopMechanisims = new JoystickButton(leftJoy, 4);
+    JoystickButton intakeReverse = new JoystickButton(leftJoy, 5);
 
     climbUp.whenPressed(new ExtendClimberConstant());
     climbDown.whenPressed(new RetractClimberConstant());
@@ -75,21 +76,33 @@ public class OI {
     JoystickButton cClimbDown = new JoystickButton(controller, 1);
     JoystickButton cBallUp = new JoystickButton(controller, 4);
     JoystickButton cBallDown = new JoystickButton(controller, 3);
-    JoystickButton cStopMechanisims = new JoystickButton(controller, 6);
+    //JoystickButton cStopMechanisims = new JoystickButton(controller, 6);
+    JoystickButton cSpinIntake = new JoystickButton(controller, 6);
+    JoystickButton cReverseIntake = new JoystickButton(controller, 5);
 
     JoystickButton cLeftballUpConstant = new JoystickButton(controller, 7);
     JoystickButton cLeftballDownConstant = new JoystickButton(controller, 9);
     JoystickButton cRightballUpConstant = new JoystickButton(controller, 8);
     JoystickButton cRightballDownConstant = new JoystickButton(controller, 10);
+    
+    /*
+    Command dpadIntake = new SpinIntake(false);
+    if (controller.getPOV() == 0) {
+      dpadIntake.start();
+    } else {
+      dpadIntake.close();
+    }*/
 
-    //cClimbUp.whileHeld(new ExtendClimberConstant());
-    //cClimbDown.whileHeld(new RetractClimberConstant());
-    cClimbUp.whenPressed(new ExtendClimber());
-    cClimbDown.whenPressed(new RetractClimber());
-    cBallUp.whenPressed(new BallLiftUp());
-    //cBallUp.whenPressed(new BallLiftUpSwitch(0.2));
+    cClimbUp.whileHeld(new ExtendClimberConstant());
+    cClimbDown.whileHeld(new RetractClimberConstant());
+    //cClimbUp.whenPressed(new ExtendClimber());
+    //cClimbDown.whenPressed(new RetractClimber());
+    //cBallUp.whenPressed(new BallLiftUp());
+    cBallUp.whenPressed(new BallLiftUpSwitch()); // DO NOT KEEP IT SET AT 1
     cBallDown.whenPressed(new BallLiftDown());
-    cStopMechanisims.whenPressed(new StopMechanisims());
+    //cStopMechanisims.whenPressed(new StopMechanisims());
+    cSpinIntake.whileHeld(new SpinIntake(false));
+    cReverseIntake.whileHeld(new SpinIntake(true));
 
     cLeftballUpConstant.whileHeld(new LeftConstant(false));
     cLeftballDownConstant.whileHeld(new LeftConstant(true));
