@@ -22,6 +22,8 @@ import frc.robot.commands.Climber.RetractClimberConstant;
 //import frc.robot.commands.Intake.ExtendIntake;
 //import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
+import frc.robot.commands.Movement.toggleCentricMode;
+import frc.robot.subsystems.NewSwerve.CentricToggle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,6 +44,7 @@ public class OI {
     JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
     JoystickButton climbUpConstant = new JoystickButton(rightJoy, 11);
     JoystickButton climbDownConstant = new JoystickButton(rightJoy, 10);
+    //do not assign button 4 //nvm
 
     //ballsUp.whenPressed(new BallLiftUp());
     ballsUp.whenPressed(new BallLiftUpSwitch());
@@ -53,23 +56,28 @@ public class OI {
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
 
-    JoystickButton climbUp = new JoystickButton(leftJoy, 3);
-    JoystickButton climbDown = new JoystickButton(leftJoy, 2);
+    //JoystickButton climbUp = new JoystickButton(leftJoy, 3);
+    //JoystickButton climbDown = new JoystickButton(leftJoy, 2);
     JoystickButton leftballUpConstant = new JoystickButton(leftJoy, 6);
     JoystickButton leftballDownConstant = new JoystickButton(leftJoy, 7);
     JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
     JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
-    JoystickButton stopMechanisims = new JoystickButton(leftJoy, 4);
-    JoystickButton intakeReverse = new JoystickButton(leftJoy, 5);
+    JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
+    JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
+    //do not assign button 3 //nvm
+    JoystickButton toggleMode = new JoystickButton(leftJoy, 3);
+    //do not assign button 4
 
-    climbUp.whenPressed(new ExtendClimberConstant());
-    climbDown.whenPressed(new RetractClimberConstant());
+    //climbUp.whenPressed(new ExtendClimberConstant());
+    //climbDown.whenPressed(new RetractClimberConstant());
     leftballUpConstant.whileHeld(new LeftConstant(false));
     leftballDownConstant.whileHeld(new LeftConstant(true));
     rightballUpConstant.whileHeld(new RightConstant(false));
     rightballDownConstant.whileHeld(new RightConstant(true));
     stopMechanisims.whenPressed(new StopMechanisims());
     intakeReverse.whileHeld(new SpinIntake(true));
+
+    toggleMode.whenPressed(new toggleCentricMode());
 
     //Controller pt2
     JoystickButton cClimbUp = new JoystickButton(controller, 2);
@@ -80,10 +88,12 @@ public class OI {
     JoystickButton cSpinIntake = new JoystickButton(controller, 6);
     JoystickButton cReverseIntake = new JoystickButton(controller, 5);
 
-    JoystickButton cLeftballUpConstant = new JoystickButton(controller, 7);
-    JoystickButton cLeftballDownConstant = new JoystickButton(controller, 9);
-    JoystickButton cRightballUpConstant = new JoystickButton(controller, 8);
-    JoystickButton cRightballDownConstant = new JoystickButton(controller, 10);
+    JoystickButton cLeftballUpConstant = new JoystickButton(controller, 9); //7
+    //JoystickButton cLeftballDownConstant = new JoystickButton(controller, 9); //9
+    JoystickButton cRightballUpConstant = new JoystickButton(controller, 10); //8
+    //JoystickButton cRightballDownConstant = new JoystickButton(controller, 10); //10
+
+    //do not assign button 8
     
     /*
     Command dpadIntake = new SpinIntake(false);
@@ -98,16 +108,16 @@ public class OI {
     //cClimbUp.whenPressed(new ExtendClimber());
     //cClimbDown.whenPressed(new RetractClimber());
     //cBallUp.whenPressed(new BallLiftUp());
-    cBallUp.whenPressed(new BallLiftUpSwitch()); // DO NOT KEEP IT SET AT 1
+    cBallUp.whenPressed(new BallLiftUpSwitch()); // DO NOT KEEP IT SET AT 1 for speed
     cBallDown.whenPressed(new BallLiftDown());
     //cStopMechanisims.whenPressed(new StopMechanisims());
     cSpinIntake.whileHeld(new SpinIntake(false));
     cReverseIntake.whileHeld(new SpinIntake(true));
 
     cLeftballUpConstant.whileHeld(new LeftConstant(false));
-    cLeftballDownConstant.whileHeld(new LeftConstant(true));
+    //cLeftballDownConstant.whileHeld(new LeftConstant(true));
     cRightballUpConstant.whileHeld(new RightConstant(false));
-    cRightballDownConstant.whileHeld(new RightConstant(true));
+    //cRightballDownConstant.whileHeld(new RightConstant(true));
   }
 
   public Joystick getLeftJoy(){

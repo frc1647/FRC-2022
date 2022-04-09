@@ -17,6 +17,7 @@ public class NewDrive extends Command {
   private double originCorr = 0;
   private double strfwdPow = 2.0;
   private double rcwPow = 2.0;
+  private boolean centricToggle;
 
   private double fwd;
   private double str;
@@ -36,12 +37,12 @@ public class NewDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if (Robot.oi.getLeftJoyButton(7)) {
-		originHeading = RobotMap.navX.getFusedHeading();
-	}*/
+    if (Robot.oi.getLeftJoy().getRawButtonPressed(4) || Robot.oi.getController().getStartButtonPressed()) {
+		  originHeading = RobotMap.navx.getFusedHeading();
+	  }
 
-	double originOffset = 360 - originHeading;
-	originCorr = RobotMap.navx.getFusedHeading() + originOffset;
+	  double originOffset = 360 - originHeading;
+	  originCorr = RobotMap.navx.getFusedHeading() + originOffset;
 
     fwd = -Robot.oi.getRightJoy().getY(); // - or + ?
     str = Robot.oi.getRightJoy().getX(); // was left joy
@@ -68,7 +69,7 @@ public class NewDrive extends Command {
     rcw = Math.abs(Math.pow(rcw, rcwPow)) * Math.signum(rcw) * rcwScale;
 
     //commented out until we get a working navx
-    if (!Robot.oi.getLeftJoy().getTrigger()) { //should have a ! (it doesn't because not sure if work)
+    if (Robot.centricToggle.get()/*Robot.oi.getLeftJoy().getRawButton(3)*/) { //should have a ! to be on automatically
       // When the Left Joystick trigger is not pressed, The robot is in Field Centric Mode.
       // The calculations correct the forward and strafe values for field centric attitude. 
     

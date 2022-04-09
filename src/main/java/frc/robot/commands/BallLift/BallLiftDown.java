@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class BallLiftDown extends Command {
   
-  /** Lifts the cargo elevator up to unload cargo. */
+  /** Lifts the cargo elevator down. */
   public BallLiftDown() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballLift);

@@ -49,14 +49,4 @@ public class BallLiftUpSwitch extends CommandGroup {
     addParallel(left);
     addSequential(right);
   }
-
-  @Override
-  protected void interrupted() {
-    end();
-  }
-
-  @Override
-  protected void end() {
-    cancel();
-  }
 }

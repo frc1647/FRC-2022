@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.BallLift.*;
+import frc.robot.commands.Movement.DriveDistance;
 import frc.robot.commands.Movement.DriveTime;
 
 public class Auto3 extends CommandGroup {
@@ -16,9 +17,10 @@ public class Auto3 extends CommandGroup {
     // addSequential(new Command2());
     // these will run in order.
 
-    addSequential(new BallLiftUpSwitch());
-    addParallel(new DriveTime(2.0, 0.5, 0, 0));
-    addSequential(new BallLiftDown());
+    addSequential(new BallLiftUpSwitchTimeout(), 3.0);
+    //addParallel(new DriveTime(2.0, 0.6, 0, 0));
+    addSequential(new DriveDistance(76, 0));
+    //addSequential(new BallLiftDown());
 
     // To run multiple commands at the same time,
     // use addParallel()

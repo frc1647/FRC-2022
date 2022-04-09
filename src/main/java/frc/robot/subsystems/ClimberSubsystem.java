@@ -35,9 +35,7 @@ public class ClimberSubsystem extends Subsystem{
     public ClimberSubsystem() {
         
         rightClimber = RobotMap.rightClimber;
-        rightClimber.configFactoryDefault();
         leftClimber = RobotMap.leftClimber;
-        leftClimber.configFactoryDefault();
         initMotor(leftClimber);
         initMotor(rightClimber);
 
@@ -98,9 +96,9 @@ public class ClimberSubsystem extends Subsystem{
         rightClimber.set(ControlMode.Position, (int)setPosition);
         leftClimber.set(ControlMode.Position, (int)setPosition);
 
-        SmartDashboard.putNumber("right Climber height", rightClimber.getSelectedSensorPosition());
-        SmartDashboard.putNumber("left Climber height", leftClimber.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Target height", setPosition);
+        //SmartDashboard.putNumber("right Climber height", rightClimber.getSelectedSensorPosition());
+        //SmartDashboard.putNumber("left Climber height", leftClimber.getSelectedSensorPosition());
+        //SmartDashboard.putNumber("Target height", setPosition);
     }
 
     public void resetClimber() {

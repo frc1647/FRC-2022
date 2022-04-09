@@ -29,6 +29,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 //import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.BallLift;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.NewSwerve.CentricToggle;
 import frc.robot.subsystems.NewSwerve.Swerve;
 import frc.robot.OI;
 import frc.robot.RobotMap;
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static UsbCamera usbCam;
+  public static CentricToggle centricToggle = new CentricToggle();
 
   //public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
   
@@ -74,8 +76,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    m_chooser.setDefaultOption("taxi", new Auto2());
+    m_chooser.setDefaultOption("taxi forward", new Auto2());
     m_chooser.addOption("score & taxi", new Auto3());
+    m_chooser.addOption("test", new AutoTest());
+    m_chooser.addOption("taxi backward", new Auto4());
     SmartDashboard.putData("Auto mode", m_chooser);
     //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
     //drivetrain.resetDriveEnc();
@@ -103,6 +107,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("right climber", ClimberSubsystem.getRightHeight());
     SmartDashboard.putBoolean("right box switch", RobotMap.rightBoxSwitch.get());
     SmartDashboard.putBoolean("left box switch", RobotMap.leftBoxSwitch.get());
+    SmartDashboard.putNumber("Gyro", RobotMap.navx.getFusedHeading());
+    SmartDashboard.putBoolean("Field Centric Enabled?", centricToggle.get());
   }
 
   /**

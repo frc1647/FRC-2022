@@ -29,9 +29,9 @@ public class IntakeSubsystem extends Subsystem {
     }
 
     public void spinIntake(int invert) {
-
-        intakeSpin.set(ControlMode.PercentOutput, 0.80 * invert);
-
+        if (!(RobotMap.rightBoxSwitch.get() || RobotMap.leftBoxSwitch.get())) {
+            intakeSpin.set(ControlMode.PercentOutput, 0.80 * invert);
+        }
     }
 
     public void stopIntakeSpin() {

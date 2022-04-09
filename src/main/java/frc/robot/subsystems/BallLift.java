@@ -45,10 +45,11 @@ public class BallLift extends Subsystem {
     BallmotorRight = RobotMap.BallLiftRight;
 
     initMotor(BallmotorLeft);
-    initMotor(BallmotorRight);
-
     BallmotorLeft.configPeakOutputForward(0.3, 0);
+
+    initMotor(BallmotorRight);
     BallmotorRight.configPeakOutputReverse(-0.3, 0);
+    
     //motor2.follow(motor1);
     //motor2.setInverted(TalonFXInvertType.OpposeMaster);
   }
@@ -60,6 +61,7 @@ public class BallLift extends Subsystem {
   }
 
   public void initMotor(WPI_TalonFX motor) {
+    motor.configFactoryDefault();
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     motor.setSensorPhase(false);
     //motor.configPeakOutputForward(0.4, 0);

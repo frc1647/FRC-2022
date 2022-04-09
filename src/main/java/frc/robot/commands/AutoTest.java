@@ -5,19 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Movement.DriveDistance;
 import frc.robot.commands.Movement.DriveTime;
 
-public class Auto2 extends CommandGroup {
+public class AutoTest extends CommandGroup {
   /** Add your docs here. */
-  public Auto2() {
+  public AutoTest() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-
-    //addSequential(new DriveTime(1, 1.0, 0, 0));
-    addSequential(new DriveDistance(85, 0));
+    addSequential(new DriveTime(1.0, 0, 0, 0.5));
 
     // To run multiple commands at the same time,
     // use addParallel()
