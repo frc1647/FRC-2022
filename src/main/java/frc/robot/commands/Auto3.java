@@ -19,7 +19,7 @@ public class Auto3 extends CommandGroup {
 
     addSequential(new BallLiftUpSwitchTimeout(), 3.0);
     //addParallel(new DriveTime(2.0, 0.6, 0, 0));
-    addSequential(new DriveDistance(76, 0));
+    addSequential(new DriveDistance(88, -42));
     //addSequential(new BallLiftDown());
 
     // To run multiple commands at the same time,

@@ -10,7 +10,7 @@ import frc.robot.Robot;
 /** Add your docs here. */
 public class RotateDegrees extends InstantCommand {
 
-private final double maxRotateSpeed = 0;
+private final double maxRotateSpeed = 103.84; //degrees per second when motors drive at 50% speed
 private double turnDegrees;
 
   /** Add your docs here. */

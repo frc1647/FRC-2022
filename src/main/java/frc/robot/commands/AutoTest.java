@@ -14,7 +14,7 @@ public class AutoTest extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new DriveTime(1.0, 0, 0, 0.5));
+    addSequential(new DriveTime(3.95, 0, 0, 0.5));
 
     // To run multiple commands at the same time,
     // use addParallel()
