@@ -13,7 +13,7 @@ public class Auto1 extends CommandGroup {
   private double forwardDistance = 40;
   private double reverseDistance = 30;
   
-  /** Autonomus sequence 1. */
+  /** Autonomus sequence 1. This was used for testing with a previous version of DriveDistance, so it is a txt file to ignore the errors.*/
   public Auto1() {
     // Add Commands here:
     // e.g. addSequential(new Command1());

@@ -45,7 +45,6 @@ public class BallLiftUp extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //Robot.ballLift.stopBallLift();
     end();
   }
 }

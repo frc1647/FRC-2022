@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command. You can replace me with your own command.
+ * You should not copy this to create new commands. Instead, right-click on a folder, select "create new class/command" and, for this codebase, select "command (old)".
  */
 public class ExampleCommand extends Command {
   public ExampleCommand() {

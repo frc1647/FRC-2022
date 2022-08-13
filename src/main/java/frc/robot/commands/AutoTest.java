@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.Movement.DriveTime;
 
 public class AutoTest extends CommandGroup {
-  /** Add your docs here. */
+  /** It's in the name. */
   public AutoTest() {
     // Add Commands here:
     // e.g. addSequential(new Command1());

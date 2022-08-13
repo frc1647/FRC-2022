@@ -9,7 +9,7 @@ import frc.robot.commands.Movement.DriveDistance;
 import frc.robot.commands.Movement.DriveTime;
 
 public class Auto2 extends CommandGroup {
-  /** Add your docs here. */
+  /** This is the simple autonomus sequence, where the robot merely drives out of the starting area. */
   public Auto2() {
     // Add Commands here:
     // e.g. addSequential(new Command1());

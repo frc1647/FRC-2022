@@ -6,7 +6,6 @@ package frc.robot.commands.BallLift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.BallLift;
 
 public class RightConstant extends Command {
 
@@ -40,12 +39,4 @@ public class RightConstant extends Command {
   protected void end() {
     Robot.ballLift.stopRightLift();
   }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  /*
-  @Override
-  protected void interrupted() {
-    //end();
-  }*/
 }

@@ -10,7 +10,10 @@ import frc.robot.commands.BallLift.*;
 import frc.robot.commands.Climber.*;
 import frc.robot.subsystems.ClimberSubsystem;
 
-/** Add your docs here. */
+/** Was intended to be a universal method to stop the major moving 
+ * parts of the robot, but some techlicalities with how wpilib old 
+ * commands handle (or don't handle) interruptions made it inaffective.
+ */
 public class StopMechanisims extends InstantCommand {
   /** Add your docs here. */
   public StopMechanisims() {

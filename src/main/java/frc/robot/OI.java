@@ -19,8 +19,6 @@ import frc.robot.commands.Climber.ExtendClimber;
 import frc.robot.commands.Climber.ExtendClimberConstant;
 import frc.robot.commands.Climber.RetractClimber;
 import frc.robot.commands.Climber.RetractClimberConstant;
-//import frc.robot.commands.Intake.ExtendIntake;
-//import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.SpinIntake;
 import frc.robot.commands.Movement.toggleCentricMode;
 import frc.robot.subsystems.NewSwerve.CentricToggle;
@@ -35,8 +33,6 @@ public class OI {
   Joystick rightJoy = RobotMap.rightJoy;
   XboxController controller = RobotMap.controller;
 
-  //Joystick tablet = RobotMap.tablet;
-
   public OI(){
     //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
     JoystickButton intakeSpin = new JoystickButton(rightJoy, 1);
@@ -44,9 +40,7 @@ public class OI {
     JoystickButton ballsDown = new JoystickButton(rightJoy, 2);
     JoystickButton climbUpConstant = new JoystickButton(rightJoy, 11);
     JoystickButton climbDownConstant = new JoystickButton(rightJoy, 10);
-    //do not assign button 4 //nvm
 
-    //ballsUp.whenPressed(new BallLiftUp());
     ballsUp.whenPressed(new BallLiftUpSwitch());
 
     ballsDown.whenPressed(new BallLiftDown());
@@ -56,20 +50,15 @@ public class OI {
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
 
-    //JoystickButton climbUp = new JoystickButton(leftJoy, 3);
-    //JoystickButton climbDown = new JoystickButton(leftJoy, 2);
     JoystickButton leftballUpConstant = new JoystickButton(leftJoy, 6);
     JoystickButton leftballDownConstant = new JoystickButton(leftJoy, 7);
     JoystickButton rightballUpConstant = new JoystickButton(leftJoy, 11);
     JoystickButton rightballDownConstant = new JoystickButton(leftJoy, 10);
     JoystickButton stopMechanisims = new JoystickButton(leftJoy, 5);
     JoystickButton intakeReverse = new JoystickButton(leftJoy, 1);
-    //do not assign button 3 //nvm
     JoystickButton toggleMode = new JoystickButton(leftJoy, 3);
-    //do not assign button 4
+    //do not assign button 4, it is used to set the robot's forward orientation in NewDrive.java
 
-    //climbUp.whenPressed(new ExtendClimberConstant());
-    //climbDown.whenPressed(new RetractClimberConstant());
     leftballUpConstant.whileHeld(new LeftConstant(false));
     leftballDownConstant.whileHeld(new LeftConstant(true));
     rightballUpConstant.whileHeld(new RightConstant(false));
@@ -79,38 +68,30 @@ public class OI {
 
     toggleMode.whenPressed(new toggleCentricMode());
 
-    //Controller pt2
+    //Controller Controller Controller Controller Controller Controller Controller 
     JoystickButton cClimbUp = new JoystickButton(controller, 2);
     JoystickButton cClimbDown = new JoystickButton(controller, 1);
     JoystickButton cBallUp = new JoystickButton(controller, 4);
     JoystickButton cBallDown = new JoystickButton(controller, 3);
-    //JoystickButton cStopMechanisims = new JoystickButton(controller, 6);
     JoystickButton cSpinIntake = new JoystickButton(controller, 6);
     JoystickButton cReverseIntake = new JoystickButton(controller, 5);
+    //do not assign button 8, it is used to set the robot's forward orientation in NewDrive.java
 
+    /* Only the up functions are used here becuase the purpose of these is for fine-tuning the 
+     * either side of the elevator. cBallUp and cBallDown handle most of the actual control.
+     */
     JoystickButton cLeftballUpConstant = new JoystickButton(controller, 9); //7
     //JoystickButton cLeftballDownConstant = new JoystickButton(controller, 9); //9
     JoystickButton cRightballUpConstant = new JoystickButton(controller, 10); //8
     //JoystickButton cRightballDownConstant = new JoystickButton(controller, 10); //10
 
-    //do not assign button 8
-    
-    /*
-    Command dpadIntake = new SpinIntake(false);
-    if (controller.getPOV() == 0) {
-      dpadIntake.start();
-    } else {
-      dpadIntake.close();
-    }*/
-
     cClimbUp.whileHeld(new ExtendClimberConstant());
     cClimbDown.whileHeld(new RetractClimberConstant());
     //cClimbUp.whenPressed(new ExtendClimber());
     //cClimbDown.whenPressed(new RetractClimber());
+    cBallUp.whenPressed(new BallLiftUpSwitch());
     //cBallUp.whenPressed(new BallLiftUp());
-    cBallUp.whenPressed(new BallLiftUpSwitch()); // DO NOT KEEP IT SET AT 1 for speed
     cBallDown.whenPressed(new BallLiftDown());
-    //cStopMechanisims.whenPressed(new StopMechanisims());
     cSpinIntake.whileHeld(new SpinIntake(false));
     cReverseIntake.whileHeld(new SpinIntake(true));
 

@@ -10,7 +10,7 @@ import frc.robot.commands.Movement.DriveDistance;
 import frc.robot.commands.Movement.DriveTime;
 
 public class Auto3 extends CommandGroup {
-  /** Add your docs here. */
+  /** This is a more complex auto where the robot starts right in front of the low goal, deposits a ball, and drives out of the start area. */
   public Auto3() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
@@ -20,7 +20,7 @@ public class Auto3 extends CommandGroup {
     addSequential(new BallLiftUpSwitchTimeout(), 3.0);
     //addParallel(new DriveTime(2.0, 0.6, 0, 0));
     addSequential(new DriveDistance(88, -42));
-    //addSequential(new BallLiftDown());
+    //addSequential(new BallLiftDown()); // was disabled to avoid problems with lowering the mailbox in the absence of operator intervention during auto
 
     // To run multiple commands at the same time,
     // use addParallel()

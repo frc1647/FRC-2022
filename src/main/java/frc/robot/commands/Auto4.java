@@ -9,7 +9,7 @@ import frc.robot.commands.Movement.DriveDistance;
 import frc.robot.commands.Movement.DriveTime;
 
 public class Auto4 extends CommandGroup {
-  /** Add your docs here. */
+  /** like Auto2, but instead the robot drives backwards! */
   public Auto4() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
