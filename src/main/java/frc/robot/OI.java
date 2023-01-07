@@ -21,6 +21,7 @@ import frc.robot.commands.Climber.RetractClimber;
 import frc.robot.commands.Climber.RetractClimberConstant;
 import frc.robot.commands.Intake.SpinIntake;
 import frc.robot.commands.Movement.toggleCentricMode;
+import frc.robot.commands.Movement.NewDrive;
 import frc.robot.subsystems.NewSwerve.CentricToggle;
 
 /**
@@ -33,6 +34,11 @@ public class OI {
   Joystick rightJoy = RobotMap.rightJoy;
   XboxController controller = RobotMap.controller;
 
+  /**
+   * This is where all the button-related controls are handled.
+   * <p>
+   * The drivetrain control (aka movement) is handled by {@link NewDrive} polling the joystick position values.
+   */
   public OI(){
     //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
     JoystickButton intakeSpin = new JoystickButton(rightJoy, 1);

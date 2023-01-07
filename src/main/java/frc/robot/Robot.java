@@ -44,19 +44,25 @@ import frc.robot.commands.Movement.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+
+  //declaring some miscellaneous varaibles
   public static String mode;
-  public static Swerve SwerveDrive = new Swerve();
+  public static UsbCamera usbCam;
+  public static double zeroHeading;
+  public static double zeroAngle;
   //public static Timer m_timer = new Timer();
+
+  //declaring the robot's subsystem classes
+  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static Swerve SwerveDrive = new Swerve();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static BallLift ballLift = new BallLift();
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
-  public static UsbCamera usbCam;
   public static CentricToggle centricToggle = new CentricToggle();
-
-  //public static frc.robot.subsystems.NewSwerve.Swerve SwerveDrive = new frc.robot.subsystems.NewSwerve.Swerve();
   
   public static OI oi;
+
+  //declaring some stuff for autonomous
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   /*
@@ -66,9 +72,6 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   */
 
-  public static double zeroHeading;
-  public static double zeroAngle;
-
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -76,13 +79,18 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+
+    //this section of code handles the autonomous mode dropdown selection on the SmartDashboard
     m_chooser.setDefaultOption("taxi forward", new Auto2());
     m_chooser.addOption("score & taxi", new Auto3());
     m_chooser.addOption("test", new AutoTest());
     m_chooser.addOption("taxi backward", new Auto4());
     SmartDashboard.putData("Auto mode", m_chooser);
+
     //ONLY RESET ENCODERS WHEN ALIGNING SWERVE
     //drivetrain.resetDriveEnc();
+
+    //These are inital heading values that get passed on to the Drive command for field-centric steering purposes.
     zeroHeading = RobotMap.navx.getFusedHeading();
     zeroAngle = RobotMap.navx.getAngle();
   }

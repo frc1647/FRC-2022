@@ -10,7 +10,6 @@ import java.util.Collections;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -27,7 +26,6 @@ public class Swerve extends Subsystem {
     private BaseMotorController flDrive = RobotMap.FLTalonD;
     private BaseMotorController rrDrive = RobotMap.RRTalonD;
     private BaseMotorController rlDrive = RobotMap.RLTalonD;
-    // BaseMotorController will be replaced with spark max because of integrated encoder on Neos
 
     private WPI_TalonSRX frSteer = RobotMap.FRTalonS;
     private WPI_TalonSRX flSteer = RobotMap.FLTalonS;
@@ -37,7 +35,7 @@ public class Swerve extends Subsystem {
     private final double width = 22.25;
     private final double length = 21.0;
     //private final double maxSpeed = 120; // inches per second
-    private final double encoderTicsPerRotation = 1660;//1024;
+    private final double encoderTicsPerRotation = 1660;//1658?
 
     // ADJUST PIDS HERE
     private final double P = 5.0;//6.9;//9.0;
@@ -69,11 +67,6 @@ public class Swerve extends Subsystem {
         initSteerMotor(flSteer, true, invertSensorPhase);
         initSteerMotor(rrSteer, true, invertSensorPhase);
         initSteerMotor(rlSteer, true, invertSensorPhase);
-        
-        //makes it move like an unpowered caster wheel
-        //flSteer.setNeutralMode(NeutralMode.Coast); // REMOVE LATER
-        //flDrive.setNeutralMode(NeutralMode.Coast); // REMOVE LATER
-        //flSteer.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.SoftwareEmulatedSensor, 0, 0);
     }
 
     private void initDriveMotor(BaseMotorController motor, boolean invert) {
@@ -123,8 +116,8 @@ public class Swerve extends Subsystem {
         double rlSpeed = Math.hypot(A, D);
 
         // Compute angles for the steering motors
-        // When drives are calibrated for zero position on encoders they can be at 90 degrees (or maybe some other angle) to the front of the robot.
-        // Subtract and add 90 degrees to steering calculation to offset for initial position/calibration of drives if the drive zero position faces the side of the robot.
+        // Angle offsets are sometimes neccessary when the zero-position of the encoders is different than the position of the wheel when facing forward.
+        // With non-absolute encoders, offsets will not be neccesary as long as the modules are aligned before the robot is powered on.
         double frAngle = Math.toDegrees(Math.atan2(B, C)) - 0;//12.66;//76.99;
         double flAngle = Math.toDegrees(Math.atan2(B, D)) - 0;//39.38;//35.16;//2.46;
         double rrAngle = Math.toDegrees(Math.atan2(A, C)) + 0;//152.93;

@@ -24,14 +24,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * This subsystem contains all of the control methods for the two 
+ * winches that move the "mailbox" (ball lift) up and down.
+ * <p>
+ * This code went through many different iterations and methods of control. The final version that was settled on is as follows: <ul>
+ * <li> For upwards movement, the winches are told to move the mailbox up until a limit switch is triggered.
+ * <li> For downwards movement, the mailbox was told to lower itself to the position it started the match in using a PID control loop.
+ * <li> Both winches can be individually lowered or raised using buttons on the base of the left joystick.
+ * </ul>
  */
 public class BallLift extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  
   public WPI_TalonFX BallmotorLeft;
   public WPI_TalonFX BallmotorRight;
 
+  // I'm relatively certain these are legacy variables from when we were 
+  // trying to reuse some code from the 2019 bot's hatch panel lift.
   private double tolerance;
   private double goalHeight;
   private double motorSpeed;
@@ -71,6 +79,7 @@ public class BallLift extends Subsystem {
     motor.setNeutralMode(NeutralMode.Brake);
     motor.configAllowableClosedloopError(0, 4, 0);
 
+    //PID control is used for the automatic lowering of the ball lift
     motor.config_kP(0, 0.5, 0);
     motor.config_kI(0, 0.0, 0);
     motor.config_kD(0, 0.0, 0);
